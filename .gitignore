@@ -18,7 +18,7 @@ hs_err_pid*
 # Intellij IDEA files
 .idea
 
-# Maven iml
+# IDE iml
 *.iml
 
 # git ignore inspired by Stevoisiak
