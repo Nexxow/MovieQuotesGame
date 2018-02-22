@@ -9,12 +9,14 @@ public class Film {
     private String titre;
     private Date annee;
     private String resume;
+    private String imageLien;
 
 
-    public Film(String titre, Date annee, String resume) {
+    public Film(String titre, Date annee, String resume, String imageLien) {
         this.titre = titre;
         this.annee = annee;
         this.resume = resume;
+        this.imageLien = imageLien;
     }
 
     public String getTitre() {
@@ -39,5 +41,13 @@ public class Film {
 
     public void setResume(String resume) {
         this.resume = resume;
+    }
+
+    public String getImageLien() {
+        return imageLien;
+    }
+
+    public void setImageLien(String imageLien) {
+        this.imageLien = imageLien;
     }
 }
