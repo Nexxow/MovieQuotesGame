@@ -1,6 +1,7 @@
 package controle;
 
 import modele.Greeting;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * Created by Ulysse Blaineau on 20/02/18.
  */
+
 @RestController
 public class GreetingController {
     private static final String template = "Hello, %s!";
@@ -20,4 +22,5 @@ public class GreetingController {
         return new Greeting(counter.incrementAndGet(),
                 String.format(template, name));
     }
+
 }

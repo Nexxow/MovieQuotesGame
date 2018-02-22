@@ -1,7 +1,13 @@
 package modele;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
- * Created by E155781C on 20/02/18.
+ * Created by Ulysse Blaineau on 20/02/18.
  */
 public class Greeting {
 
@@ -20,4 +26,5 @@ public class Greeting {
     public String getContent() {
         return content;
     }
+
 }
