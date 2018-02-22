@@ -36,6 +36,9 @@ public class Citation {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date ajd = new Date();
 
-        return (this.date == ajd);
+        String ajdStr = dateFormat.format(ajd);
+        String dateStr = dateFormat.format(this.date);
+
+        return (dateStr.equals(ajdStr));
     }
 }
