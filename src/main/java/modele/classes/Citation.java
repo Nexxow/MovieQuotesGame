@@ -1,5 +1,7 @@
 package modele.classes;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -28,5 +30,12 @@ public class Citation {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean estCitationJour() {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Date ajd = new Date();
+
+        return (this.date == ajd);
     }
 }
