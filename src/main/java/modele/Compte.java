@@ -10,8 +10,9 @@ public class Compte {
     private String genrePrefere;
     private String mdp;
     private String lienAvatar;
+    private String citationFav;
 
-    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar) {
+    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar, String citationFav) {
         // On initialise le score à 0
         this.score = 0;
         this.pseudo = pseudo;
@@ -19,6 +20,7 @@ public class Compte {
         this.genrePrefere = genrePrefere;
         this.mdp = mdp;
         this.lienAvatar = lienAvatar;
+        this.citationFav = citationFav;
     }
 
     public int getScore() {
@@ -67,5 +69,13 @@ public class Compte {
 
     public void setLienAvatar(String lienAvatar) {
         this.lienAvatar = lienAvatar;
+    }
+
+    public String getCitationFav() {
+        return citationFav;
+    }
+
+    public void setCitationFav(String citationFav) {
+        this.citationFav = citationFav;
     }
 }
