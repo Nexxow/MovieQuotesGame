@@ -1,4 +1,4 @@
-package modele;
+package modele.classes;
 
 import java.io.BufferedReader;
 import java.io.IOException;

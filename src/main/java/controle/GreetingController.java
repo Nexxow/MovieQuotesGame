@@ -1,7 +1,6 @@
 package controle;
 
-import modele.Greeting;
-import org.springframework.stereotype.Component;
+import modele.classes.Greeting;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
