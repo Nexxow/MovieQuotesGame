@@ -15,7 +15,6 @@ public class CompteController {
     @RequestMapping("/newUser")
     public String newUser(@RequestParam(value="login", defaultValue = "Login") String login){
         Compte compte = new Compte(login, "", "", "", "");
-        compte.generateToken();
         return compte.getToken();
     }
 

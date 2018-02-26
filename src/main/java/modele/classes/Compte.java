@@ -24,6 +24,7 @@ public class Compte {
         this.genrePrefere = genrePrefere;
         this.mdp = mdp;
         this.lienAvatar = lienAvatar;
+        generateToken();
     }
 
     public int getScore() {
