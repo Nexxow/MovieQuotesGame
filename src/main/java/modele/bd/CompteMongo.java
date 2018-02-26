@@ -11,7 +11,6 @@ import org.bson.Document;
  */
 public class CompteMongo {
 
-
     public void ajoutCompteBD(Compte compte) {
 
         // Creating a Mongo client
@@ -26,6 +25,5 @@ public class CompteMongo {
                 compte.getFilmVote().toString());
 
         collection.insertOne(doc);
-
     }
 }
