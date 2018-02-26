@@ -22,6 +22,6 @@ public class CompteController {
     // Prends un token en entrée pour retourner un compte
     @RequestMapping("/getUser")
     public String getUser(@RequestParam(value="token") String token){
-
+        return null;
     }
 }
