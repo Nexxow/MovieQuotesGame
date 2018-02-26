@@ -104,4 +104,15 @@ public class Compte {
     public void setToken(String token) {
         this.token = token;
     }
+
+    // Voter pour un film
+    public boolean voter(Film filmVote){
+        if (this.filmVote == null){
+            this.filmVote = filmVote;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

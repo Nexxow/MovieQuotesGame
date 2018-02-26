@@ -10,9 +10,11 @@ public class Film {
     private Date annee;
     private String resume;
     private String imageLien;
+    private int votesJour;
 
 
     public Film(String titre, Date annee, String resume, String imageLien) {
+        this.votesJour = 0;
         this.titre = titre;
         this.annee = annee;
         this.resume = resume;
@@ -49,5 +51,13 @@ public class Film {
 
     public void setImageLien(String imageLien) {
         this.imageLien = imageLien;
+    }
+
+    public int getVotesJour() {
+        return votesJour;
+    }
+
+    public void setVotesJour(int votesJour) {
+        this.votesJour = votesJour;
     }
 }
