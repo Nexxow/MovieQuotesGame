@@ -11,7 +11,7 @@ import org.bson.Document;
  */
 public class CompteMongo {
 
-    public void ajoutCompteBD(Compte compte) {
+    public static void ajoutCompteBD(Compte compte) {
 
         // Creating a Mongo client
         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );

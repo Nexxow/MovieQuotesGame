@@ -1,5 +1,7 @@
 package modele.classes;
 
+import modele.bd.CompteMongo;
+
 import java.security.SecureRandom;
 
 /**
@@ -25,6 +27,12 @@ public class Compte {
         this.mdp = mdp;
         this.lienAvatar = lienAvatar;
         generateToken();
+        ajoutCompteMongo();
+    }
+
+    // Appel dans CompteMongo pour ajouter à la bd
+    private void ajoutCompteMongo() {
+        CompteMongo.ajoutCompteBD(this);
     }
 
     public int getScore() {
