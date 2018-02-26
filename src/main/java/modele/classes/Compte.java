@@ -1,5 +1,7 @@
 package modele.classes;
 
+import java.security.SecureRandom;
+
 /**
  * Created by Ulysse Blaineau on 22/02/18.
  */
@@ -12,6 +14,7 @@ public class Compte {
     private String lienAvatar;
     private String citationFav;
     private Film filmVote;
+    private String token;
 
     public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar) {
         // On initialise le score à 0
@@ -85,5 +88,20 @@ public class Compte {
 
     public void setFilmVote(Film filmVote) {
         this.filmVote = filmVote;
+    }
+
+    public void generateToken() {
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[20];
+        random.nextBytes(bytes);
+        this.token = bytes.toString();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

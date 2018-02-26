@@ -1,6 +1,8 @@
 package controle;
 
 import modele.classes.Citation;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
@@ -12,7 +14,6 @@ public class CitationController {
     public CitationController() {
         listeCitations = null;
     }
-
 
     // Recuperation de la citation du jour
     public Citation recuperationCitationJour() {
@@ -27,5 +28,4 @@ public class CitationController {
         
         return citationAjd;
     }
-
 }
