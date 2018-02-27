@@ -1,7 +1,5 @@
 package modele.bd;
 
-import com.mongodb.Block;
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import modele.classes.Compte;
@@ -16,41 +14,41 @@ public class CompteMongo {
 
     public static void ajoutCompteBD(Compte compte) {
 
-        // Creating a Mongo client
-        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-
-        MongoDatabase database = mongoClient.getDatabase("movieQuotesGame");
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
 
         MongoCollection<Document> collection = database.getCollection("comptes");
 
+        Document doc = javaToMongo(compte);
+
+        collection.insertOne(doc);
+
+    }
+
+    public static Compte getCompteBD(String token) {
+
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("comptes");
+
+        // Recherche dans la collection le compte avec le bon token
+        Document doc = collection.find(eq("token", token)).first();
+
+        return mongoToJava(doc);
+    }
+
+    public static Document javaToMongo(Compte compte){
         Document doc = new Document("token", compte.getToken()).append("pseudo", compte.getPseudo()).append("mdp", compte.getMdp()).append("mail", compte.getMail()).append("lienAvatar",
                 compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere());
 
-        collection.insertOne(doc);
+        return doc;
     }
 
-    public static Document getCompteBD(String token) {
+    public static Compte mongoToJava(Document doc){
 
-        final Document[] doc = new Document[1];
-
-        // Creating a Mongo client
-        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-
-        MongoDatabase database = mongoClient.getDatabase("movieQuotesGame");
-
-        MongoCollection<Document> collection = database.getCollection("comptes");
-
-        // Permet de retourner en Json ce qu'on query
-        Block<Document> returnJson = new Block<Document>() {
-            @Override
-            public void apply(final Document document) {
-                doc[0] = document;
-            }
-        };
-
-        // Recherche dans la collection le compte avec le bon token
-        collection.find(eq("token", token)).forEach(returnJson);
-
-        return doc[0];
+        // Initialisation d'un objet
+        Compte compte = new Compte(doc.getString("token"), doc.getString("mail"), doc.getString("genrePrefere"), doc.getString("mdp"), doc.getString("lienAvatar"));
+        return compte;
     }
 }

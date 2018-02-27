@@ -23,7 +23,7 @@ public class CompteController {
 
     // Prends un token en entrée pour retourner un compte
     @RequestMapping("/getUser")
-    public Document getUser(@RequestParam(value="token") String token){
+    public Compte getUser(@RequestParam(value="token") String token){
         return getCompteBD(token);
     }
 }
