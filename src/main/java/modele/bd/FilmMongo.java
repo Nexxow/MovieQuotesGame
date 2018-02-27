@@ -2,11 +2,14 @@ package modele.bd;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import modele.classes.Citation;
-import modele.classes.Compte;
+import modele.classes.Film;
 import modele.classes.Film;
 import org.bson.Document;
+
+import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -34,10 +37,29 @@ public class FilmMongo {
 
         MongoCollection<Document> collection = database.getCollection("films");
 
-        // Recherche dans la collection le compte avec le bon token
+        // Recherche dans la collection le Film avec le bon token
         Document doc = collection.find(eq("titre", titre)).first();
 
         return mongoToJava(doc);
+    }
+
+    public static ArrayList<Film> getFilmsBD(){
+        ArrayList<Film> films= new ArrayList<>();
+
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("films");
+
+        MongoCursor<Document> cursor = collection.find().iterator();
+
+        while (cursor.hasNext()){
+            films.add(mongoToJava(cursor.next()));
+        }
+
+        cursor.close();
+
+        return films;
     }
 
     public static Document javaToMongo(Film film){

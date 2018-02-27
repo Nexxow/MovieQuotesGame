@@ -18,7 +18,7 @@ import static modele.bd.CitationMongo.getCitationsBD;
 @RestController
 public class CitationController {
 
-    // Prends une citation en entrée, lui met la date du jour et l'insère dans la base de donnée
+    // Prends une citation en entrée, lui met la date du jour et l'insère dans la base de données
     @RequestMapping("/newCitation")
     public Citation newCitation(@RequestParam(value="citationStr") String citationStr){
         Citation citation = new Citation(citationStr, new Date());

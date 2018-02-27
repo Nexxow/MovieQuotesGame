@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static modele.bd.FilmMongo.ajoutFilmBD;
 import static modele.bd.FilmMongo.getFilmBD;
+import static modele.bd.FilmMongo.getFilmsBD;
 
 /**
  * Created by Ulysse Blaineau on 27/02/18.
@@ -30,6 +32,13 @@ public class FilmController {
     @RequestMapping("/getFilm")
     public Film getFilm(@RequestParam(value="titre") String titre){
         return getFilmBD(titre);
+    }
+
+    // Retourne la liste de tous les films
+    @RequestMapping("/getFilms")
+    public ArrayList<Film> getFilms(){
+
+        return getFilmsBD();
     }
 
 }
