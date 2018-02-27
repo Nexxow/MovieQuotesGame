@@ -29,9 +29,9 @@ public class CompteMongo {
         collection.insertOne(doc);
     }
 
-    public static String getCompteBD(String token) {
+    public static Document getCompteBD(String token) {
 
-        final String[] jsonDoc = new String[1];
+        final Document[] doc = new Document[1];
 
         // Creating a Mongo client
         MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
@@ -44,13 +44,13 @@ public class CompteMongo {
         Block<Document> returnJson = new Block<Document>() {
             @Override
             public void apply(final Document document) {
-                jsonDoc[0] = document.toJson();
+                doc[0] = document;
             }
         };
 
         // Recherche dans la collection le compte avec le bon token
         collection.find(eq("token", token)).forEach(returnJson);
 
-        return jsonDoc[0];
+        return doc[0];
     }
 }

@@ -1,6 +1,7 @@
 package controle;
 
 import modele.classes.Compte;
+import org.bson.Document;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class CompteController {
 
     // Prends un token en entrée pour retourner un compte
     @RequestMapping("/getUser")
-    public String getUser(@RequestParam(value="token") String token){
+    public Document getUser(@RequestParam(value="token") String token){
         return getCompteBD(token);
     }
 }
