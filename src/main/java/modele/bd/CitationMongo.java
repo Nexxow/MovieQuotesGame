@@ -15,16 +15,14 @@ import static com.mongodb.client.model.Filters.eq;
  */
 public class CitationMongo {
 
-    public void ajoutCitationBD(Citation citation) {
+    public static void ajoutCitationBD(Citation citation) {
 
-        // Creating a Mongo client
-        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-
-        MongoDatabase database = mongoClient.getDatabase("movieQuotesGame");
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
 
         MongoCollection<Document> collection = database.getCollection("citations");
 
-        Document doc = new Document("citation", citation.getCitation()).append("estCitationJour", citation.estCitationJour()).append("date", citation.getDate().toString());
+        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate().toString());
 
         collection.insertOne(doc);
     }

@@ -15,12 +15,10 @@ import static com.mongodb.client.model.Filters.eq;
  */
 public class FilmMongo {
 
-    public void ajoutFilmBD(Film film) {
+    public static void ajoutFilmBD(Film film) {
 
-        // Creating a Mongo client
-        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
-
-        MongoDatabase database = mongoClient.getDatabase("movieQuotesGame");
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
 
         MongoCollection<Document> collection = database.getCollection("films");
 
