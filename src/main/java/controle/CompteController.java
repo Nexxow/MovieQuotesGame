@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+import static modele.bd.CompteMongo.ajoutCompteBD;
 import static modele.bd.CompteMongo.getCompteBD;
 import static modele.bd.CompteMongo.getComptesBD;
 
@@ -19,7 +20,10 @@ public class CompteController {
     // Prends un login en entrée, créer un compte puis retourne son token
     @RequestMapping("/newUser")
     public String newUser(@RequestParam(value="login", defaultValue = "Login") String login){
-        Compte compte = new Compte(login, login + "@gmail.com", "slasher", "oui", "oui");
+        Compte compte = new Compte(login + "", login + "@gmail.com", "slasher", "oui", "oui");
+
+        ajoutCompteBD(compte);
+
         return compte.getToken();
     }
 

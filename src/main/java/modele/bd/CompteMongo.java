@@ -62,7 +62,7 @@ public class CompteMongo {
 
     public static Document javaToMongo(Compte compte){
         Document doc = new Document("token", compte.getToken()).append("pseudo", compte.getPseudo()).append("mdp", compte.getMdp()).append("mail", compte.getMail()).append("lienAvatar",
-                compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere());
+                compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("score", compte.getScore());
 
         return doc;
     }
@@ -70,7 +70,8 @@ public class CompteMongo {
     public static Compte mongoToJava(Document doc){
 
         // Initialisation d'un objet
-        Compte compte = new Compte(doc.getString("token"), doc.getString("mail"), doc.getString("genrePrefere"), doc.getString("mdp"), doc.getString("lienAvatar"));
+        Compte compte = new Compte(doc.getString("pseudo"), doc.getString("mail"), doc.getString("genrePrefere"), doc.getString("mdp"), doc.getString("lienAvatar"),
+                doc.getString("token"), doc.getInteger("score"));
         return compte;
     }
 }

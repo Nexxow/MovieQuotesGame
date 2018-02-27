@@ -18,6 +18,7 @@ public class Compte {
     private Film filmVote;
     private String token;
 
+    // Pour la première création on génère le token
     public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar) {
         // On initialise le score à 0
         this.score = 0;
@@ -27,7 +28,17 @@ public class Compte {
         this.mdp = mdp;
         this.lienAvatar = lienAvatar;
         generateToken();
-        ajoutCompteMongo();
+    }
+
+    // Lorsque l'on récupère dans la db
+    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar, String token, int score) {
+        this.pseudo = pseudo;
+        this.mail = mail;
+        this.genrePrefere = genrePrefere;
+        this.mdp = mdp;
+        this.lienAvatar = lienAvatar;
+        this.token = token;
+        this.score = score;
     }
 
     // Appel dans CompteMongo pour ajouter à la bd
