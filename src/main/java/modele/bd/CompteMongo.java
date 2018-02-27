@@ -1,9 +1,12 @@
 package modele.bd;
 
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import modele.classes.Compte;
 import org.bson.Document;
+
+import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -36,6 +39,25 @@ public class CompteMongo {
         Document doc = collection.find(eq("token", token)).first();
 
         return mongoToJava(doc);
+    }
+
+    public static ArrayList<Compte> getComptesBD(){
+        ArrayList<Compte> comptes= new ArrayList<>();
+
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("comptes");
+
+        MongoCursor<Document> cursor = collection.find().iterator();
+
+        while (cursor.hasNext()){
+            comptes.add(mongoToJava(cursor.next()));
+        }
+
+        cursor.close();
+
+        return comptes;
     }
 
     public static Document javaToMongo(Compte compte){

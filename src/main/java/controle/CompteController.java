@@ -1,12 +1,14 @@
 package controle;
 
 import modele.classes.Compte;
-import org.bson.Document;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+
 import static modele.bd.CompteMongo.getCompteBD;
+import static modele.bd.CompteMongo.getComptesBD;
 
 /**
  * Created by Ulysse Blaineau on 23/02/18.
@@ -25,5 +27,12 @@ public class CompteController {
     @RequestMapping("/getUser")
     public Compte getUser(@RequestParam(value="token") String token){
         return getCompteBD(token);
+    }
+
+    // Retourne la liste de toutes les citations
+    @RequestMapping("/getComptes")
+    public ArrayList<Compte> getComptes(){
+
+        return getComptesBD();
     }
 }

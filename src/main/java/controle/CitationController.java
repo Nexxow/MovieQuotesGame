@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static modele.bd.CitationMongo.ajoutCitationBD;
 import static modele.bd.CitationMongo.getCitationBD;
+import static modele.bd.CitationMongo.getCitationsBD;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
@@ -34,9 +36,8 @@ public class CitationController {
 
     // Retourne la liste de toutes les citations
     @RequestMapping("/getCitations")
-    public Citation[] getCitations(){
+    public ArrayList<Citation> getCitations(){
 
-        return null;
-
+        return getCitationsBD();
     }
 }

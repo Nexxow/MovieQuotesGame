@@ -1,7 +1,11 @@
 package modele.bd;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
+
+import java.util.Collection;
 
 /**
  * Created by E155781C on 27/02/18.
