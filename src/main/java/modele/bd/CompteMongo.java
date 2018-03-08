@@ -3,8 +3,10 @@ package modele.bd;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import modele.classes.Compte;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,19 @@ public class CompteMongo {
 
         collection.insertOne(doc);
 
+    }
+
+    // met à jour un élément dans la bd
+    public static void majCompteBD(Compte compte) {
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("comptes");
+
+        Document doc = javaToMongo(compte);
+
+        // On remplace par la nouvelle valeur
+        collection.replaceOne(Filters.eq("token", compte.getToken()), javaToMongo(compte));
     }
 
     public static Compte getCompteBD(String token) {
@@ -74,4 +89,5 @@ public class CompteMongo {
                 doc.getString("token"), doc.getInteger("score"));
         return compte;
     }
+
 }

@@ -11,6 +11,9 @@ public class Film {
     private String resume;
     private String imageLien;
     private int votesJour;
+    private int id;
+
+    private static int cpt = 0;
 
 
     public Film(String titre, Date annee, String resume, String imageLien) {
@@ -19,6 +22,18 @@ public class Film {
         this.annee = annee;
         this.resume = resume;
         this.imageLien = imageLien;
+        this.id = cpt;
+        cpt ++;
+    }
+
+    // Constructeur lors de la récupération dans mongoDB
+    public Film(int id, String titre, Date annee, String resume, String imageLien) {
+        this.votesJour = 0;
+        this.titre = titre;
+        this.annee = annee;
+        this.resume = resume;
+        this.imageLien = imageLien;
+        this.id = id;
     }
 
     public String getTitre() {
@@ -59,5 +74,13 @@ public class Film {
 
     public void setVotesJour(int votesJour) {
         this.votesJour = votesJour;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

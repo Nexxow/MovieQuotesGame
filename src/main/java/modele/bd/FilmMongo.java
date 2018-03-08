@@ -1,11 +1,8 @@
 package modele.bd;
 
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import modele.classes.Citation;
-import modele.classes.Film;
 import modele.classes.Film;
 import org.bson.Document;
 
@@ -37,8 +34,21 @@ public class FilmMongo {
 
         MongoCollection<Document> collection = database.getCollection("films");
 
-        // Recherche dans la collection le Film avec le bon token
+        // Recherche dans la collection le Film avec le bon titre
         Document doc = collection.find(eq("titre", titre)).first();
+
+        return mongoToJava(doc);
+    }
+
+    public static Film getFilmBD(int id) {
+
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("films");
+
+        // Recherche dans la collection le Film avec le bon id
+        Document doc = collection.find(eq("id", id)).first();
 
         return mongoToJava(doc);
     }
@@ -63,7 +73,7 @@ public class FilmMongo {
     }
 
     public static Document javaToMongo(Film film){
-        Document doc = new Document("titre", film.getTitre()).append("date", film.getAnnee().toString()).append("resume", film.getResume()).append("imageLien", film.getImageLien())
+        Document doc = new Document("id", film.getId()).append("titre", film.getTitre()).append("date", film.getAnnee().toString()).append("resume", film.getResume()).append("imageLien", film.getImageLien())
                 .append("votesJour", film.getVotesJour());
 
         return doc;
@@ -72,7 +82,7 @@ public class FilmMongo {
     public static Film mongoToJava(Document doc){
 
         // Initialisation d'un objet
-        Film film = new Film(doc.getString("titre"), doc.getDate("annee"), doc.getString("resume"), doc.getString("imageLien"));
+        Film film = new Film(doc.getInteger("id"), doc.getString("titre"), doc.getDate("annee"), doc.getString("resume"), doc.getString("imageLien"));
         return film;
     }
 

@@ -106,10 +106,6 @@ public class Compte {
         return filmVote;
     }
 
-    public void setFilmVote(Film filmVote) {
-        this.filmVote = filmVote;
-    }
-
     public void generateToken() {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[20];

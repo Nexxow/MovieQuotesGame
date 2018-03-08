@@ -23,6 +23,8 @@ public class CitationMongo {
 
         MongoCollection<Document> collection = database.getCollection("citations");
 
+
+
         Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate().toString());
 
         collection.insertOne(doc);

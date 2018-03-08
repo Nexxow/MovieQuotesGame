@@ -29,9 +29,15 @@ public class FilmController {
     }
 
     // Prends un titre en entrée et retourne le film
-    @RequestMapping("/getFilm")
-    public Film getFilm(@RequestParam(value="titre") String titre){
+    @RequestMapping("/getFilmTitre")
+    public Film getFilmTitre(@RequestParam(value="titre") String titre){
         return getFilmBD(titre);
+    }
+
+    // Prends un id en entrée et retourne le film
+    @RequestMapping("/getFilmId")
+    public Film getFilmId(@RequestParam(value="id") int id){
+        return getFilmBD(id);
     }
 
     // Retourne la liste de tous les films
