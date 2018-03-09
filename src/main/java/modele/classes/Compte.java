@@ -4,7 +4,7 @@ import modele.bd.CompteMongo;
 
 import java.security.SecureRandom;
 
-import static metier.Score.addScoreFilm;
+import static metier.Vote.addScoreFilm;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
@@ -134,5 +134,9 @@ public class Compte {
         else {
             return false;
         }
+    }
+
+    public void reinitialiseVote(){
+        this.filmVote = null;
     }
 }

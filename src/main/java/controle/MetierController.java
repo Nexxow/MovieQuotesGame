@@ -1,14 +1,12 @@
 package controle;
 
-import controle.exceptions.NoMovieException;
 import modele.classes.Compte;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import static metier.Score.getScore;
+import static metier.Vote.getScore;
 import static modele.bd.CompteMongo.getCompteBD;
 import static modele.bd.CompteMongo.majCompteBD;
 import static modele.bd.FilmMongo.getFilmBD;

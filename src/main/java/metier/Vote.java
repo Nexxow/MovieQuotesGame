@@ -1,14 +1,19 @@
 package metier;
 
+import modele.classes.Compte;
 import modele.classes.Film;
 
+import java.util.ArrayList;
 import java.util.Map;
+
+import static modele.bd.CompteMongo.getComptesBD;
+import static modele.bd.CompteMongo.majCompteBD;
 
 /**
  * Created by Ulysse Blaineau on 09/03/18
  * Classe permettant de rajouter au score, et d'avoir le score final de chaque film
  */
-public class Score {
+public class Vote {
 
     private static Map<Film, Integer> map;
 
@@ -34,6 +39,14 @@ public class Score {
         }
         else {
             return 0;
+        }
+    }
+
+    public void reinitialiserVotes(){
+        ArrayList<Compte> comptes = getComptesBD();
+        for (Compte compte : comptes){
+            compte.reinitialiseVote();
+            majCompteBD(compte);
         }
     }
 }
