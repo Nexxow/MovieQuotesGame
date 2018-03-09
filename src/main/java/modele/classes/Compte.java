@@ -4,8 +4,11 @@ import modele.bd.CompteMongo;
 
 import java.security.SecureRandom;
 
+import static metier.Score.addScoreFilm;
+
 /**
  * Created by Ulysse Blaineau on 22/02/18.
+ * Classe définissant un Compte d'utilisateur
  */
 public class Compte {
     private int score;
@@ -125,6 +128,7 @@ public class Compte {
     public boolean voter(Film filmVote){
         if (this.filmVote == null){
             this.filmVote = filmVote;
+            addScoreFilm(filmVote);
             return true;
         }
         else {

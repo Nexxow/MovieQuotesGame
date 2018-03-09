@@ -1,11 +1,14 @@
 package controle;
 
+import controle.exceptions.NoMovieException;
 import modele.classes.Compte;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import static metier.Score.getScore;
 import static modele.bd.CompteMongo.getCompteBD;
 import static modele.bd.CompteMongo.majCompteBD;
 import static modele.bd.FilmMongo.getFilmBD;
@@ -39,4 +42,22 @@ public class MetierController {
             return null;
         }
     }
+
+    @RequestMapping("/getScoreFilm")
+    public Object getScoreFilm(@RequestParam String titre){
+        try {
+            return getScore(getFilmBD(titre));
+        }
+        catch (NullPointerException e){
+            return "Erreur, film inexistant";
+        }
+    }
+
+    /**
+    @ExceptionHandler({NoMovieException.class})
+    public void handleException{
+
+    }
+
+    **/
 }

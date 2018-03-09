@@ -10,14 +10,14 @@ import java.util.Map;
  */
 public class Score {
 
-    Map<Film, Integer> map;
+    private static Map<Film, Integer> map;
 
     /**
      *
      * @param film
      * @return
      */
-    public void addScoreFilm(Film film){
+    public static void addScoreFilm(Film film){
         // On regarde si la map contient déjà le film
         if (map.containsKey(film)) {
             map.replace(film, map.get(film) + 1);
@@ -28,7 +28,12 @@ public class Score {
         }
     }
 
-    public int getScore(Film film){
-        return map.get(film);
+    public static int getScore(Film film){
+        if (map.containsKey(film)){
+            return map.get(film);
+        }
+        else {
+            return 0;
+        }
     }
 }
