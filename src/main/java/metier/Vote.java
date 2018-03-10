@@ -3,8 +3,7 @@ package metier;
 import modele.classes.Compte;
 import modele.classes.Film;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 import static modele.bd.CompteMongo.getComptesBD;
 import static modele.bd.CompteMongo.majCompteBD;
@@ -15,7 +14,7 @@ import static modele.bd.CompteMongo.majCompteBD;
  */
 public class Vote {
 
-    private static Map<Film, Integer> map;
+    private static Map<Film, Integer> map = new HashMap<Film, Integer>();
 
     /**
      *
@@ -23,7 +22,7 @@ public class Vote {
      * @return
      */
     public static void addScoreFilm(Film film){
-        // On regarde si la map contient déjà le film
+        // On regarde si la map contient déjà le film, dans ce cas on rajoute un vote
         if (map.containsKey(film)) {
             map.replace(film, map.get(film) + 1);
         }
@@ -39,6 +38,22 @@ public class Vote {
         }
         else {
             return 0;
+        }
+    }
+
+    public static Film getPremierFilm(){
+        Map.Entry<Film, Integer> maxEntry = null;
+        for (Map.Entry<Film, Integer> entry : map.entrySet()){
+            if (maxEntry == null || entry.getValue() > maxEntry.getValue()){
+                maxEntry = entry;
+            }
+        }
+        if (maxEntry != null) {
+            Film premierFilm = maxEntry.getKey();
+            return premierFilm;
+        }
+        else {
+            return null;
         }
     }
 

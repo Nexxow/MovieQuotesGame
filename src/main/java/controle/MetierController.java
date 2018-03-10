@@ -1,6 +1,8 @@
 package controle;
 
+import metier.Vote;
 import modele.classes.Compte;
+import modele.classes.Film;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,11 +45,24 @@ public class MetierController {
 
     @RequestMapping("/getScoreFilm")
     public Object getScoreFilm(@RequestParam String titre){
-        try {
-            return getScore(getFilmBD(titre));
+        Film film = getFilmBD(titre);
+        if (film != null){
+            return getScore(film);
         }
-        catch (NullPointerException e){
-            return "Erreur, film inexistant";
+        else {
+            return null;
+        }
+
+    }
+
+    @RequestMapping("/getPremierFilm")
+    public Object getPremierFilm(){
+        Film film =  Vote.getPremierFilm();
+        if (film == null) {
+            return "Erreur, pas de votes encore";
+        }
+        else {
+            return film;
         }
     }
 
