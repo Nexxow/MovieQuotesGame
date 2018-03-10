@@ -1,5 +1,7 @@
 package controle;
 
+import com.google.gson.Gson;
+import modele.classes.ListeFilms;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,7 @@ import java.net.URL;
 public class TmdbApiController {
 
     String apiKey;
-    String urlToRead = "https://api.themoviedb.org/3/movie/550?api_key=f426d1cd57c76ce8189d04c7d7656164";
+    String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key=f426d1cd57c76ce8189d04c7d7656164&sort_by=popularity.desc";
 
     @RequestMapping("/getmovie")
     public String getMovie(){
@@ -51,7 +53,8 @@ public class TmdbApiController {
             }
             in.close();
 
-
+            // conversion en objet
+            ListeFilms films = new Gson().fromJson(response.toString(), ListeFilms.class);
 
             return response.toString();
         } else {
