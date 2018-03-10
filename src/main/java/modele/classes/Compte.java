@@ -34,7 +34,7 @@ public class Compte {
     }
 
     // Lorsque l'on récupère dans la db
-    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar, String token, int score) {
+    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar, String token, int score, Film filmVote) {
         this.pseudo = pseudo;
         this.mail = mail;
         this.genrePrefere = genrePrefere;
@@ -42,6 +42,7 @@ public class Compte {
         this.lienAvatar = lienAvatar;
         this.token = token;
         this.score = score;
+        this.filmVote = filmVote;
     }
 
     // Appel dans CompteMongo pour ajouter à la bd

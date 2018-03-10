@@ -5,12 +5,13 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import modele.classes.Compte;
+import modele.classes.Film;
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 
 import static com.mongodb.client.model.Filters.eq;
+import static modele.bd.FilmMongo.getFilmBD;
 
 /**
  * Created by Ulysse Blaineau on 26/02/18.
@@ -76,17 +77,28 @@ public class CompteMongo {
     }
 
     public static Document javaToMongo(Compte compte){
+        String titre = null;
+        if (compte.getFilmVote() != null){
+            titre = compte.getFilmVote().getTitre();
+        }
         Document doc = new Document("token", compte.getToken()).append("pseudo", compte.getPseudo()).append("mdp", compte.getMdp()).append("mail", compte.getMail()).append("lienAvatar",
-                compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("score", compte.getScore());
+                compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("score", compte.getScore()).append("film", titre);
 
         return doc;
     }
 
     public static Compte mongoToJava(Document doc){
 
+        Film film = null;
+
+        String titre = doc.getString("film");
+        if (titre != null) {
+            film = getFilmBD(titre);
+        }
+
         // Initialisation d'un objet
         Compte compte = new Compte(doc.getString("pseudo"), doc.getString("mail"), doc.getString("genrePrefere"), doc.getString("mdp"), doc.getString("lienAvatar"),
-                doc.getString("token"), doc.getInteger("score"));
+                doc.getString("token"), doc.getInteger("score"), film);
         return compte;
     }
 

@@ -66,11 +66,4 @@ public class MetierController {
         }
     }
 
-    /**
-    @ExceptionHandler({NoMovieException.class})
-    public void handleException{
-
-    }
-
-    **/
 }

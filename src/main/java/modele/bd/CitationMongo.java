@@ -28,6 +28,8 @@ public class CitationMongo {
         Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate().toString());
 
         collection.insertOne(doc);
+
+
     }
 
     public static Citation getCitationBD(Date date) {
