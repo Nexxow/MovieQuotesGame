@@ -23,7 +23,7 @@ public class TmdbApiController {
     public String getMovie(){
 
         try {
-            return getFromUrl("https://api.themoviedb.org/3/movie/550?api_key=f426d1cd57c76ce8189d04c7d7656164");
+            return getFromUrl(urlToRead);
         } catch (Exception e) {
             e.printStackTrace();
             return e.toString();
@@ -38,15 +38,26 @@ public class TmdbApiController {
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        int responseCode = conn.getResponseCode();
 
-        String line;
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    conn.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+
+
+            return response.toString();
+        } else {
+
+            return "GET request not worked";
         }
-        rd.close();
-
-        return result.toString();
     }
 
 }
