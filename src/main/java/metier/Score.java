@@ -1,11 +1,13 @@
 package metier;
 
 import modele.classes.Compte;
+import modele.classes.Film;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import static metier.Vote.getPremierFilm;
 import static modele.bd.CompteMongo.getComptesBD;
 
 public class Score {
@@ -20,6 +22,16 @@ public class Score {
                 }
             });
             return comptes;
+    }
+
+    public void compterScore(){
+        Film prFilm = getPremierFilm();
+        ArrayList<Compte> comptes = getComptesBD();
+        for (Compte compte : comptes){
+            if (compte.getFilmVote() == prFilm){
+                compte.setScore(compte.getScore() + 1);
+            }
+        }
     }
 
 }

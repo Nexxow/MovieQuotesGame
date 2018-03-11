@@ -79,7 +79,7 @@ public class CompteMongo {
     public static Document javaToMongo(Compte compte){
         String titre = null;
         if (compte.getFilmVote() != null){
-            titre = compte.getFilmVote().getTitre();
+            titre = compte.getFilmVote().getTitle();
         }
         Document doc = new Document("token", compte.getToken()).append("pseudo", compte.getPseudo()).append("mdp", compte.getMdp()).append("mail", compte.getMail()).append("lienAvatar",
                 compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("score", compte.getScore()).append("film", titre);
