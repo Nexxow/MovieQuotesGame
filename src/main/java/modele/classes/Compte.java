@@ -10,8 +10,8 @@ import static metier.Vote.addScoreFilm;
  * Created by Ulysse Blaineau on 22/02/18.
  * Classe définissant un Compte d'utilisateur
  */
-public class Compte {
-    private int score;
+public class Compte implements Comparable<Compte>{
+    public int score;
     private String pseudo;
     private String mail;
     private String genrePrefere;
@@ -139,5 +139,15 @@ public class Compte {
 
     public void reinitialiseVote(){
         this.filmVote = null;
+    }
+
+    @Override
+    public int compareTo(Compte c) {
+        if (this.score > c.score){
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package controle;
 
+import metier.Score;
 import metier.Vote;
 import modele.classes.Compte;
 import modele.classes.Film;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import java.util.ArrayList;
 
 import static metier.Vote.getScore;
 import static modele.bd.CompteMongo.getCompteBD;
@@ -64,6 +67,11 @@ public class MetierController {
         else {
             return film;
         }
+    }
+
+    @RequestMapping("/getClassement")
+    public ArrayList<Compte> getClassement(){
+        return Score.getClassement();
     }
 
 }
