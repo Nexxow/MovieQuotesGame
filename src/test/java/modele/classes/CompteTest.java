@@ -26,18 +26,18 @@ public class CompteTest {
   }
 
   @Test
-  public void generateToken() throws Exception {
+  public void TestgenerateToken() throws Exception {
     compte.generateToken();
     assertTrue("Token généré",compte != null);
   }
 
   @Test
-  public void voter() throws Exception {
+  public void Testvoter() throws Exception {
     assertTrue("vote pour le film",compte.voter(filmVote));
   }
 
   @Test
-  public void reinitialiseVote() throws Exception {
+  public void TestreinitialiseVote() throws Exception {
     compte.reinitialiseVote();
 assertTrue("film vote = null",compte.getFilmVote()==null);  }
 
