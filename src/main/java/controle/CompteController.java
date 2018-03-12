@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-import static modele.bd.CompteMongo.ajoutCompteBD;
-import static modele.bd.CompteMongo.getCompteBD;
-import static modele.bd.CompteMongo.getComptesBD;
+import static modele.bd.CompteMongo.*;
 
 /**
  * Classe permettant de faire l'interface api pour pour les comptes
@@ -25,8 +23,9 @@ public class CompteController {
      * @return Token du compte
      */
     @RequestMapping("/newUser")
-    public Compte newUser(@RequestParam(value="login", defaultValue = "Login") String login){
-        Compte compte = new Compte(login + "", login + "@gmail.com", "slasher", "oui", "oui");
+    public Compte newUser(@RequestParam(value="login", defaultValue = "Login") String login, @RequestParam String mdp, @RequestParam String mail, @RequestParam String genrePrefere,
+                          @RequestParam String lienAvatar){
+        Compte compte = new Compte(login + "", mail + "", genrePrefere + "", mdp + "", lienAvatar + "");
 
         ajoutCompteBD(compte);
 
@@ -52,5 +51,14 @@ public class CompteController {
     public ArrayList<Compte> getComptes(){
 
         return getComptesBD();
+    }
+
+    @RequestMapping("/majCompte")
+    public Compte majCompte(@RequestParam(value="login", defaultValue = "Login") String login, @RequestParam String mdp, @RequestParam String mail, @RequestParam String genrePrefere,
+                            @RequestParam String lienAvatar, @RequestParam String citationFav, @RequestParam String token){
+        Compte compte = new Compte(login, mail, genrePrefere, mdp, lienAvatar, citationFav, token);
+        majCompteBD(compte);
+
+        return getCompteBD(token);
     }
 }

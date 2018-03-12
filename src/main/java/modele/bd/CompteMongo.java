@@ -82,7 +82,7 @@ public class CompteMongo {
             titre = compte.getFilmVote().getTitle();
         }
         Document doc = new Document("token", compte.getToken()).append("pseudo", compte.getPseudo()).append("mdp", compte.getMdp()).append("mail", compte.getMail()).append("lienAvatar",
-                compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("score", compte.getScore()).append("film", titre);
+                compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("citationFav", compte.getCitationFav()).append("score", compte.getScore()).append("film", titre);
 
         return doc;
     }
@@ -97,8 +97,8 @@ public class CompteMongo {
         }
 
         // Initialisation d'un objet
-        Compte compte = new Compte(doc.getString("pseudo"), doc.getString("mail"), doc.getString("genrePrefere"), doc.getString("mdp"), doc.getString("lienAvatar"),
-                doc.getString("token"), doc.getInteger("score"), film);
+        Compte compte = new Compte(doc.getString("pseudo"), doc.getString("mdp"), doc.getString("mail"), doc.getString("genrePrefere"),
+                doc.getString("citationFav"), doc.getString("lienAvatar"), doc.getString("token"), doc.getInteger("score"), film);
         return compte;
     }
 

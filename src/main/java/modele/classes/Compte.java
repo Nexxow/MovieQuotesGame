@@ -34,15 +34,27 @@ public class Compte implements Comparable<Compte>{
     }
 
     // Lorsque l'on récupère dans la db
-    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar, String token, int score, Film filmVote) {
+    public Compte(String pseudo, String mdp, String mail, String genrePrefere, String citationFav, String lienAvatar, String token, int score, Film filmVote) {
+        this.pseudo = pseudo;
+        this.mail = mail;
+        this.genrePrefere = genrePrefere;
+        this.mdp = mdp;
+        this.lienAvatar = lienAvatar;
+        this.citationFav = citationFav;
+        this.token = token;
+        this.score = score;
+        this.filmVote = filmVote;
+    }
+
+    // Constructeur lorsque l'on met à jour
+    public Compte(String pseudo, String mail, String genrePrefere, String mdp, String lienAvatar, String citationFav, String token){
         this.pseudo = pseudo;
         this.mail = mail;
         this.genrePrefere = genrePrefere;
         this.mdp = mdp;
         this.lienAvatar = lienAvatar;
         this.token = token;
-        this.score = score;
-        this.filmVote = filmVote;
+        this.citationFav = citationFav;
     }
 
     // Appel dans CompteMongo pour ajouter à la bd
