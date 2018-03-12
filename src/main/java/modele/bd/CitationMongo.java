@@ -44,7 +44,7 @@ public class CitationMongo {
         MongoCollection<Document> collection = database.getCollection("citations");
 
         // On remplace par la nouvelle valeur
-        collection.replaceOne(Filters.eq("citation", citation.getCitation()), javaToMongo(citation));
+        collection.replaceOne(Filters.eq("citation", citation.getQuote()), javaToMongo(citation));
     }
 
     public static Citation getCitationBD(Date date) {
@@ -87,7 +87,7 @@ public class CitationMongo {
             titre = citation.getFilm().getTitle();
         }
 
-        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate().getTime()).append("titre", titre);
+        Document doc = new Document("citation", citation.getQuote()).append("date", citation.getDate().getTime()).append("titre", titre);
 
         return doc;
     }

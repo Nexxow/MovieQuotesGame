@@ -39,7 +39,7 @@ public class CitationController {
      *          la date de l'on veut la citation
      * @return
      */
-    @RequestMapping("/getCitation")
+    @RequestMapping("/getQuote")
     public Citation getCitation(@RequestParam(value="date") Date date){
         return getCitationBD(date);
     }
