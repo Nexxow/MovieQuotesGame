@@ -1,4 +1,4 @@
-package controle;
+package metier;
 
 import com.google.gson.Gson;
 import modele.classes.Film;
@@ -17,14 +17,12 @@ import java.util.ArrayList;
  * Created by Ulysse Blaineau on 21/02/18.
  */
 
-@RestController
-public class TmdbApiController {
+public class Films {
 
     String apiKey;
     String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key=f426d1cd57c76ce8189d04c7d7656164&sort_by=popularity.desc";
 
-    @RequestMapping("/getmovie")
-    public ArrayList<Film> getMovie(){
+    public ArrayList<Film> getMovies(){
 
         try {
             return getFromUrl(urlToRead);
@@ -63,5 +61,7 @@ public class TmdbApiController {
             return null;//"GET request not worked";
         }
     }
+
+
 
 }
