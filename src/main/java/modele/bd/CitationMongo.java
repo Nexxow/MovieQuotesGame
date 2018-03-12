@@ -4,12 +4,14 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import modele.classes.Citation;
+import modele.classes.Film;
 import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 import static com.mongodb.client.model.Filters.eq;
+import static modele.bd.FilmMongo.getFilmBD;
 
 /**
  * Created by Ulysse Blaineau on 26/02/18.
@@ -67,15 +69,27 @@ public class CitationMongo {
     }
 
     public static Document javaToMongo(Citation citation){
-        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate());
+        String titre = null;
+        if (citation.getFilm() != null){
+            titre = citation.getFilm().getTitle();
+        }
+
+        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate()).append("titre", titre);
 
         return doc;
     }
 
     public static Citation mongoToJava(Document doc){
 
+        Film film = null;
+
+        String titre = doc.getString("film");
+        if (titre != null) {
+            film = getFilmBD(titre);
+        }
+
         // Initialisation d'un objet
-        Citation citation = new Citation(doc.getString("citation"), doc.getDate("date"));
+        Citation citation = new Citation(doc.getString("citation"), doc.getDate("date"), film);
 
         return citation;
     }

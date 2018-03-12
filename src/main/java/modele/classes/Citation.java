@@ -10,10 +10,25 @@ import java.util.Date;
 public class Citation {
     private String citation;
     private Date date;
+    private Film film;
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
 
     public Citation(String citation, Date date) {
         this.citation = citation;
         this.date = date;
+    }
+
+    public Citation(String citation, Date date, Film film) {
+        this.citation = citation;
+        this.date = date;
+        this.film = film;
     }
 
     public String getCitation() {

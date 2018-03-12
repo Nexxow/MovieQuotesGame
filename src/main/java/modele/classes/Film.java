@@ -1,5 +1,6 @@
 package modele.classes;
 
+import javax.validation.constraints.Null;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,11 +54,15 @@ public class Film {
     }
 
     public Date getAnnee() {
+        // Si il n'y a pas d'annee
         try {
             annee =  format.parse(release_date);
         } catch (ParseException e) {
             e.printStackTrace();
+        } catch (NullPointerException e){
+            return annee;
         }
+
         return annee;
     }
 
