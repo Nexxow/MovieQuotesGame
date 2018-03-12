@@ -1,4 +1,4 @@
-package controle;
+package metier;
 
 import com.google.gson.Gson;
 import modele.classes.Film;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 
 @RestController
-public class TmdbApiController {
+public class GetFilmsTmdbApi {
 
     String apiKey;
     String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key=f426d1cd57c76ce8189d04c7d7656164&sort_by=popularity.desc";
