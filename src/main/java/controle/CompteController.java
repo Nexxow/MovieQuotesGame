@@ -1,5 +1,6 @@
 package controle;
 
+import modele.classes.Citation;
 import modele.classes.Compte;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+import static metier.Vote.lienFilmCitation;
 import static modele.bd.CompteMongo.*;
 
 /**
@@ -49,7 +51,6 @@ public class CompteController {
      */
     @RequestMapping("/getComptes")
     public ArrayList<Compte> getComptes(){
-
         return getComptesBD();
     }
 

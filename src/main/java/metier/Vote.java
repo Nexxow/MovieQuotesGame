@@ -1,5 +1,6 @@
 package metier;
 
+import modele.classes.Citation;
 import modele.classes.Compte;
 import modele.classes.Film;
 
@@ -64,4 +65,12 @@ public class Vote {
             majCompteBD(compte);
         }
     }
+
+    public static Citation lienFilmCitation(Citation citation){
+        if (citation.estCitationJour()){
+            citation.setFilm(getPremierFilm());
+        }
+        return citation;
+    }
+
 }

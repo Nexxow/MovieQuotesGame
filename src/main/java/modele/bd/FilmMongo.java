@@ -73,7 +73,8 @@ public class FilmMongo {
     }
 
     public static Document javaToMongo(Film film){
-        Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().toString()).append("resume", film.getOverview()).append("imageLien", film.getPoster_path());
+        Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().toString()).append("resume", film.getOverview())
+                .append("imageLien", film.getPoster_path()).append("score", film.getScore());
 
         return doc;
     }
@@ -81,7 +82,8 @@ public class FilmMongo {
     public static Film mongoToJava(Document doc){
 
         // Initialisation d'un objet
-        Film film = new Film(doc.getInteger("id"), doc.getString("titre"), doc.getDate("annee"), doc.getString("resume"), doc.getString("imageLien"));
+        Film film = new Film(doc.getInteger("id"), doc.getString("titre"), doc.getDate("annee"), doc.getString("resume"), doc.getString("imageLien"),
+                doc.getInteger("score"));
         return film;
     }
 

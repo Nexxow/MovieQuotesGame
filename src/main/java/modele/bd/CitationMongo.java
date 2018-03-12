@@ -3,10 +3,13 @@ package modele.bd;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import modele.classes.Citation;
 import modele.classes.Film;
 import org.bson.Document;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -27,11 +30,21 @@ public class CitationMongo {
 
 
 
-        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate().toString());
+        Document doc = javaToMongo(citation);
 
         collection.insertOne(doc);
 
 
+    }
+
+    public static void majCitationBD(Citation citation){
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("citations");
+
+        // On remplace par la nouvelle valeur
+        collection.replaceOne(Filters.eq("citation", citation.getCitation()), javaToMongo(citation));
     }
 
     public static Citation getCitationBD(Date date) {
@@ -74,12 +87,12 @@ public class CitationMongo {
             titre = citation.getFilm().getTitle();
         }
 
-        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate()).append("titre", titre);
+        Document doc = new Document("citation", citation.getCitation()).append("date", citation.getDate().getTime()).append("titre", titre);
 
         return doc;
     }
 
-    public static Citation mongoToJava(Document doc){
+    public static Citation mongoToJava(Document doc) {
 
         Film film = null;
 
@@ -89,7 +102,7 @@ public class CitationMongo {
         }
 
         // Initialisation d'un objet
-        Citation citation = new Citation(doc.getString("citation"), doc.getDate("date"), film);
+        Citation citation = new Citation(doc.getString("citation"), new Date(doc.getLong("date")), film);
 
         return citation;
     }

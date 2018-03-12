@@ -38,8 +38,6 @@ public class CompteMongo {
 
         MongoCollection<Document> collection = database.getCollection("comptes");
 
-        Document doc = javaToMongo(compte);
-
         // On remplace par la nouvelle valeur
         collection.replaceOne(Filters.eq("token", compte.getToken()), javaToMongo(compte));
     }

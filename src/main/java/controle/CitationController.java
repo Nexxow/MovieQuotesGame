@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static modele.bd.CitationMongo.ajoutCitationBD;
-import static modele.bd.CitationMongo.getCitationBD;
-import static modele.bd.CitationMongo.getCitationsBD;
+import static metier.Vote.lienFilmCitation;
+import static modele.bd.CitationMongo.*;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
@@ -51,7 +50,9 @@ public class CitationController {
      */
     @RequestMapping("/getCitations")
     public ArrayList<Citation> getCitations(){
-
+        for (Citation citation : getCitationsBD()){
+            majCitationBD(lienFilmCitation(citation));
+        }
         return getCitationsBD();
     }
 }

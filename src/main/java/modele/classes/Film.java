@@ -22,6 +22,8 @@ public class Film {
     // id
     private int id;
 
+    private int score;
+
     private Date annee;
 
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -29,6 +31,7 @@ public class Film {
 
 
     public Film(String title, Date annee, String resume, String imageLien) {
+        this.score = 0;
         this.title = title;
         this.annee = annee;
         this.overview = resume;
@@ -37,12 +40,13 @@ public class Film {
     }
 
     // Constructeur lors de la récupération dans mongoDB
-    public Film(int id, String title, Date annee, String resume, String imageLien) {
+    public Film(int id, String title, Date annee, String resume, String imageLien, int score) {
         this.title = title;
         this.annee = annee;
         this.overview = resume;
         this.poster_path = imageLien;
         this.id = id;
+        this.score = score;
     }
 
     public String getTitle() {
@@ -106,4 +110,11 @@ public class Film {
     }
 
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
