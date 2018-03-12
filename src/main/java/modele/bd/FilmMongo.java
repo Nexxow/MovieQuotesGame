@@ -3,10 +3,12 @@ package modele.bd;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import modele.classes.Film;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -25,6 +27,16 @@ public class FilmMongo {
         Document doc = javaToMongo(film);
 
         collection.insertOne(doc);
+    }
+
+    public static void majFilmBD(Film film){
+        Connexion co = new Connexion();
+        MongoDatabase database = co.Connexion();
+
+        MongoCollection<Document> collection = database.getCollection("films");
+
+        // On remplace par la nouvelle valeur
+        collection.replaceOne(Filters.eq("id", film.getId()), javaToMongo(film));
     }
 
     public static Film getFilmBD(String titre) {
@@ -73,7 +85,7 @@ public class FilmMongo {
     }
 
     public static Document javaToMongo(Film film){
-        Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().toString()).append("resume", film.getOverview())
+        Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().getTime()).append("resume", film.getOverview())
                 .append("imageLien", film.getPoster_path()).append("score", film.getScore());
 
         return doc;
@@ -82,7 +94,7 @@ public class FilmMongo {
     public static Film mongoToJava(Document doc){
 
         // Initialisation d'un objet
-        Film film = new Film(doc.getInteger("id"), doc.getString("titre"), doc.getDate("annee"), doc.getString("resume"), doc.getString("imageLien"),
+        Film film = new Film(doc.getInteger("id"), doc.getString("titre"), new Date(doc.getLong("date")), doc.getString("resume"), doc.getString("imageLien"),
                 doc.getInteger("score"));
         return film;
     }

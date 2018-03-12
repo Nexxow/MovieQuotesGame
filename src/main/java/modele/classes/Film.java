@@ -6,11 +6,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
  */
-public class Film {
+public class Film implements Comparable<Film> {
     private final String urlImage ="https://image.tmdb.org/t/p/w600_and_h900_bestv2";
 
     @JsonProperty("titre")
@@ -33,16 +34,16 @@ public class Film {
     private Date annee;
 
     DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-    private static int cpt = 0;
-
-
+    // a supprimé dans la version finale
     public Film(String title, Date annee, String resume, String imageLien) {
         this.score = 0;
         this.title = title;
         this.annee = annee;
         this.overview = resume;
         this.poster_path = imageLien;
-        this.id = cpt++;
+
+        Random r = new Random();
+        this.id = r.nextInt((1000 - 0) + 1) + 0;
     }
 
     // Constructeur lors de la récupération dans mongoDB
@@ -121,5 +122,15 @@ public class Film {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public int compareTo(Film o) {
+        if (this.score > o.score){
+            return 1;
+        }
+        else {
+            return -1;
+        }
     }
 }

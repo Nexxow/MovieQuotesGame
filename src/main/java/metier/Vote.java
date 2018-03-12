@@ -8,6 +8,7 @@ import java.util.*;
 
 import static modele.bd.CompteMongo.getComptesBD;
 import static modele.bd.CompteMongo.majCompteBD;
+import static modele.bd.FilmMongo.getFilmsBD;
 
 /**
  * Created by Ulysse Blaineau on 09/03/18
@@ -23,39 +24,19 @@ public class Vote {
      * @return
      */
     public static void addScoreFilm(Film film){
-        // On regarde si la map contient déjà le film, dans ce cas on rajoute un vote
-        if (map.containsKey(film)) {
-            map.replace(film, map.get(film) + 1);
-        }
-        // sinon on l'ajoute avec un vote
-        else {
-            map.put(film, 1);
-        }
-    }
-
-    public static int getScore(Film film){
-        if (map.containsKey(film)){
-            return map.get(film);
-        }
-        else {
-            return 0;
-        }
+        film.setScore(film.getScore() + 1);
     }
 
     public static Film getPremierFilm(){
-        Map.Entry<Film, Integer> maxEntry = null;
-        for (Map.Entry<Film, Integer> entry : map.entrySet()){
-            if (maxEntry == null || entry.getValue() > maxEntry.getValue()){
-                maxEntry = entry;
+        ArrayList<Film> films = getFilmsBD();
+
+        Collections.sort(films, new Comparator<Film>() {
+            @Override
+            public int compare(Film o1, Film o2) {
+                return o1.compareTo(o2);
             }
-        }
-        if (maxEntry != null) {
-            Film premierFilm = maxEntry.getKey();
-            return premierFilm;
-        }
-        else {
-            return null;
-        }
+        });
+        return films.get(0);
     }
 
     public void reinitialiserVotes(){

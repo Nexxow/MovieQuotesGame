@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-import static metier.Vote.getScore;
 import static modele.bd.CompteMongo.getCompteBD;
 import static modele.bd.CompteMongo.majCompteBD;
 import static modele.bd.FilmMongo.getFilmBD;
+import static modele.bd.FilmMongo.majFilmBD;
 
 /**
  * Classe permettant de faire l'interface api pour le coté metier de l'application
@@ -38,6 +38,8 @@ public class MetierController {
         if (err) {
             // On met à jour la base de données
             majCompteBD(compte);
+            // On met à jour le score du film
+            majFilmBD(getFilmBD(id));
             return compte;
         }
         // return null si l'utilisateur a déjà voté
@@ -50,7 +52,7 @@ public class MetierController {
     public Object getScoreFilm(@RequestParam String titre){
         Film film = getFilmBD(titre);
         if (film != null){
-            return getScore(film);
+            return film.getScore();
         }
         else {
             return null;
