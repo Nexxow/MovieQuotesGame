@@ -25,12 +25,12 @@ public class CompteController {
      * @return Token du compte
      */
     @RequestMapping("/newUser")
-    public String newUser(@RequestParam(value="login", defaultValue = "Login") String login){
+    public Compte newUser(@RequestParam(value="login", defaultValue = "Login") String login){
         Compte compte = new Compte(login + "", login + "@gmail.com", "slasher", "oui", "oui");
 
         ajoutCompteBD(compte);
 
-        return compte.getToken();
+        return getCompteBD(compte.getToken());
     }
 
     /**
