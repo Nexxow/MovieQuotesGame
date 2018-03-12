@@ -45,6 +45,14 @@ public class CitationMongoTest {
   }
 
   @Test
+  public void TestmajCitationBD() throws Exception {
+    ajoutCitationBD(citation);
+    citation.setQuote("nouvelle citation");
+    majCitationBD(citation);
+    assertEquals("MAJ citation",citation,getCitationBD(ajd));
+  }
+
+  @Test
   public void  TestgetCitationBD() throws Exception {
     Citation citation2 = new Citation("Test", ajd);
     ajoutCitationBD(citation2);

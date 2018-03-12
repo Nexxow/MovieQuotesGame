@@ -1,35 +1,55 @@
 package modele.bd;
 
+import com.mongodb.client.MongoDatabase;
+import modele.classes.Compte;
+import org.junit.Before;
 import org.junit.Test;
 
+import static modele.bd.CompteMongo.ajoutCompteBD;
+import static modele.bd.CompteMongo.getCompteBD;
 import static org.junit.Assert.*;
 
 /**
  * Created by Nicolas Bourges on 12/03/18.
  */
 public class CompteMongoTest {
-  @Test
-  public void ajoutCompteBD() throws Exception {
+
+  Connexion co;
+  MongoDatabase database;
+  Compte compte;
+
+  @Before
+  public void initialize(){
+    co = new Connexion();
+    database = co.Connexion();
+    compte = new Compte("pseudo", "test", "comédie", "mdp", "urlavatar");
   }
 
   @Test
-  public void majCompteBD() throws Exception {
+  public void TestajoutCompteBD() throws Exception {
+    ajoutCompteBD(compte);
+    assertEquals("compte dans BD", true, getCompteBD(compte.getToken()));
   }
 
   @Test
-  public void getCompteBD() throws Exception {
+  public void TestmajCompteBD() throws Exception {
+
   }
 
   @Test
-  public void getComptesBD() throws Exception {
+  public void TestgetCompteBD() throws Exception {
   }
 
   @Test
-  public void javaToMongo() throws Exception {
+  public void TestgetComptesBD() throws Exception {
   }
 
   @Test
-  public void mongoToJava() throws Exception {
+  public void TestjavaToMongo() throws Exception {
+  }
+
+  @Test
+  public void TestmongoToJava() throws Exception {
   }
 
 }

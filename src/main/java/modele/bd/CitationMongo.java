@@ -54,7 +54,7 @@ public class CitationMongo {
 
         MongoCollection<Document> collection = database.getCollection("citations");
 
-        // Recherche dans la collection le compte avec le bon token
+        // Recherche dans la collection le compte avec la bonne date
         Document doc = collection.find(eq("date", date)).first();
 
         return mongoToJava(doc);
