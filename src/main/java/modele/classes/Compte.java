@@ -150,10 +150,13 @@ public class Compte implements Comparable<Compte>{
     @Override
     public int compareTo(Compte c) {
         if (this.score > c.score){
-            return 1;
+            return -1;
+        }
+        else if (this.score == c.score){
+            return 0;
         }
         else {
-            return -1;
+            return 1;
         }
     }
 }

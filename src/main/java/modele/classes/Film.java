@@ -144,4 +144,34 @@ public class Film implements Comparable<Film> {
             return 1;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Film film = (Film) o;
+
+        if (id != film.id) return false;
+        if (score != film.score) return false;
+        if (urlImage != null ? !urlImage.equals(film.urlImage) : film.urlImage != null) return false;
+        if (title != null ? !title.equals(film.title) : film.title != null) return false;
+        if (poster_path != null ? !poster_path.equals(film.poster_path) : film.poster_path != null) return false;
+        if (release_date != null ? !release_date.equals(film.release_date) : film.release_date != null) return false;
+        if (overview != null ? !overview.equals(film.overview) : film.overview != null) return false;
+        return annee != null ? annee.equals(film.annee) : film.annee == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = urlImage != null ? urlImage.hashCode() : 0;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (poster_path != null ? poster_path.hashCode() : 0);
+        result = 31 * result + (release_date != null ? release_date.hashCode() : 0);
+        result = 31 * result + (overview != null ? overview.hashCode() : 0);
+        result = 31 * result + id;
+        result = 31 * result + score;
+        result = 31 * result + (annee != null ? annee.hashCode() : 0);
+        return result;
+    }
 }

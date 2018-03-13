@@ -3,6 +3,7 @@ package controle;
 import metier.Vote;
 import modele.bd.Connexion;
 import modele.classes.Citation;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,8 @@ import java.util.Date;
  * Classe permettant de faire l'interface api pour les citations
  */
 @RestController
+@CrossOrigin
+@RequestMapping("/")
 public class CitationController {
 
     Connexion co = new Connexion();
@@ -52,9 +55,6 @@ public class CitationController {
      */
     @RequestMapping("/getCitations")
     public ArrayList<Citation> getCitations(){
-        for (Citation citation : co.getCitationsBD()){
-            co.majCitationBD(vote.lienFilmCitation(citation));
-        }
         return co.getCitationsBD();
     }
 }

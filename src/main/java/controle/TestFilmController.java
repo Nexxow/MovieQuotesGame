@@ -16,6 +16,8 @@ import java.util.Date;
  * Classe permettant de faire l'interface api pour les films
  * Created by Ulysse Blaineau on 27/02/18.
  */
+@CrossOrigin
+@RequestMapping("/")
 @RestController
 public class TestFilmController {
 

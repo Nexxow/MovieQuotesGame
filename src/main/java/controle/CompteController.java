@@ -11,6 +11,9 @@ import java.util.ArrayList;
  * Classe permettant de faire l'interface api pour pour les comptes
  * Created by Ulysse Blaineau on 23/02/18.
  */
+
+@CrossOrigin
+@RequestMapping("/")
 @RestController
 public class CompteController {
 
@@ -66,5 +69,13 @@ public class CompteController {
     @RequestMapping("/getClassementComptes")
     public ArrayList<Compte> getClassementComptes(){
         return score.getClassement();
+    }
+
+    // Prends un token en entrée pour retourner un compte
+    @RequestMapping("/newUser2")
+    public Compte newUser2(){
+        Compte c = new Compte("login", "mail", "genre", "mdp", "lien");
+        co.ajoutCompteBD(c);
+        return c;
     }
 }
