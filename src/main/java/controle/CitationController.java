@@ -24,15 +24,6 @@ public class CitationController {
     private Vote vote = new Vote();
 
     /**
-     * Méthode qui retourne la liste de toutes les citations
-     * @return la liste de toutes les citations
-     */
-    @RequestMapping("/getCitations")
-    public ArrayList<Citation> getCitations(){
-        return co.getCitationsBD();
-    }
-
-    /**
      * Méthode qui retourne la citation du jour
      * @return la citation du jour
      */
