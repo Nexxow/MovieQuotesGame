@@ -12,6 +12,10 @@ import static modele.bd.CompteMongo.getComptesBD;
 
 public class Score {
 
+    /**
+     * Fonction permettant de prendre le classement entre les utilisateurs
+     * @return
+     */
     public static ArrayList<Compte> getClassement(){
             ArrayList<Compte> comptes = getComptesBD();
 
@@ -24,7 +28,10 @@ public class Score {
             return comptes;
     }
 
-    public void compterScore(){
+    /**
+     * Fonction permettant de compter les scores des joueurs pour les mettre à jour
+     */
+    public static void compterScore(){
         Film prFilm = getPremierFilm();
         ArrayList<Compte> comptes = getComptesBD();
         for (Compte compte : comptes){

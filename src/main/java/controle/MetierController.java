@@ -51,6 +51,11 @@ public class MetierController {
         }
     }
 
+    /**
+     * permet d'avoir le score d'un film
+     * @param titre
+     * @return le score ou null si le film n'existe pas
+     */
     @RequestMapping("/getScoreFilm")
     public Object getScoreFilm(@RequestParam String titre){
         Film film = getFilmBD(titre);
@@ -63,6 +68,10 @@ public class MetierController {
 
     }
 
+    /**
+     * permet de prendre le film avec le plus de score
+     * @return le film avec le plus de score
+     */
     @RequestMapping("/getPremierFilm")
     public Object getPremierFilm(){
         Film film =  Vote.getPremierFilm();

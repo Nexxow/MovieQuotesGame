@@ -54,6 +54,17 @@ public class CompteController {
         return getComptesBD();
     }
 
+    /**
+     * Méthode permettant de mettre à jour un compte
+     * @param login
+     * @param mdp
+     * @param mail
+     * @param genrePrefere
+     * @param lienAvatar
+     * @param citationFav
+     * @param token
+     * @return le compte mis à jour
+     */
     @RequestMapping("/majCompte")
     public Compte majCompte(@RequestParam(value="login", defaultValue = "Login") String login, @RequestParam String mdp, @RequestParam String mail, @RequestParam String genrePrefere,
                             @RequestParam String lienAvatar, @RequestParam String citationFav, @RequestParam String token){
