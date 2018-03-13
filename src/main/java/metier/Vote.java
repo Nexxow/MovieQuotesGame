@@ -26,7 +26,6 @@ public class Vote {
     /**
      * Fonction permettant de rajouter un point au score du film
      * @param film le film où on augmente son score
-     * @return
      */
     public void addScoreFilm(Film film){
         film.setScore(film.getScore() + 1);
