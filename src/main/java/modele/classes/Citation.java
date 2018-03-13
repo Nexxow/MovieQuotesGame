@@ -9,6 +9,7 @@ import java.util.Date;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
+ * Classe permettant de définir une citation
  */
 public class Citation {
     @JsonProperty("citation")
@@ -63,6 +64,10 @@ public class Citation {
         this.date = date;
     }
 
+    /**
+     * Fonction qui permet de savoir si la citation est la citation du jour
+     * @return true ou false
+     */
     public boolean estCitationJour() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date ajd = new Date();

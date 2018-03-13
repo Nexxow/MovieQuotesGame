@@ -11,6 +11,7 @@ import java.util.Random;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
+ * Classe définissant un film
  */
 public class Film implements Comparable<Film> {
     private final String urlImage ="https://image.tmdb.org/t/p/w600_and_h900_bestv2";

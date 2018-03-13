@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
+ * Classe définissant une liste de films
  */
 public class ListeFilms {
 
