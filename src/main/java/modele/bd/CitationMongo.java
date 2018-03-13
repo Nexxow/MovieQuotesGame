@@ -87,7 +87,7 @@ public class CitationMongo {
             titre = citation.getFilm().getTitle();
         }
 
-        Document doc = new Document("citation", citation.getQuote()).append("date", citation.getDate().getTime()).append("titre", titre);
+        Document doc = new Document("citation", citation.getQuote()).append("date", citation.getDate().getTime()).append("film", titre);
 
         return doc;
     }

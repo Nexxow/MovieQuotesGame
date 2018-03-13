@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+import static metier.Vote.addScoreFilm;
 import static modele.bd.CompteMongo.getCompteBD;
 import static modele.bd.CompteMongo.majCompteBD;
 import static modele.bd.FilmMongo.getFilmBD;
@@ -33,13 +34,15 @@ public class MetierController {
     public Compte voteFilm(@RequestParam(value="token") String token, @RequestParam int id){
 
         Compte compte = getCompteBD(token);
-        boolean err = compte.voter(getFilmBD(id));
+        Film film = getFilmBD(id);
+        boolean err = compte.voter(film);
 
         if (err) {
+            // On met à jour le score du film
+            addScoreFilm(film);
+            majFilmBD(film);
             // On met à jour la base de données
             majCompteBD(compte);
-            // On met à jour le score du film
-            majFilmBD(getFilmBD(id));
             return compte;
         }
         // return null si l'utilisateur a déjà voté
