@@ -18,10 +18,16 @@ import static com.mongodb.client.model.Filters.eq;
 /**
  * Created by E155781C on 27/02/18.
  */
+
+/**
+ * Classe qui permet de créer le lien entre la base de données et l'application
+ */
 public class Connexion {
     private MongoDatabase database;
 
-
+    /**
+     * Constructeur de la classe
+     */
     public Connexion(){
 
         // Creating a Mongo client
@@ -30,6 +36,10 @@ public class Connexion {
         this.database = mongoClient.getDatabase("movieQuotesGame");
     }
 
+    /**
+     * méthode permettant d'ajouter une citation à la base de données
+     * @param citation la citation a mettre dans la BD
+     */
     public void ajoutCitationBD(Citation citation) {
 
         MongoCollection<Document> collection = this.database.getCollection("citations");
@@ -39,6 +49,10 @@ public class Connexion {
         collection.insertOne(doc);
     }
 
+    /**
+     * Méthode permettant de mettre à jour une citation se trouvant dans la base de données
+     * @param citation la citation à modifier
+     */
     public void majCitationBD(Citation citation){
 
         MongoCollection<Document> collection = this.database.getCollection("citations");
@@ -47,15 +61,24 @@ public class Connexion {
         collection.replaceOne(Filters.eq("citation", citation.getQuote()), javaToMongo(citation));
     }
 
+    /**
+     * Méthode permettant de récupérer une citation depuis la base de données via sa date
+     * @param date la date lorsque la citation était la citation du jour
+     * @return la citation correspondante
+     */
     public Citation getCitationBD(Date date) {
         MongoCollection<Document> collection = this.database.getCollection("citations");
 
-        // Recherche dans la collection le compte avec la bonne date
+        // Recherche dans la collection la citation avec la bonne date
         Document doc = collection.find(eq("date", date)).first();
 
         return mongoToJavaCitation(doc);
     }
 
+    /**
+     * Méthode permettant de récupérer toutes les citations se trouvant dans la base de données
+     * @return un tableau comprenant toutes les citations
+     */
     public ArrayList<Citation> getCitationsBD(){
 
         ArrayList<Citation> citations = new ArrayList<>();
@@ -74,6 +97,11 @@ public class Connexion {
 
     }
 
+    /**
+     * Méthode permettant de convertir une citation en java en document pour l'intégrer dans la base de données
+     * @param citation la citation à convertir
+     * @return le document pour la base de données
+     */
     public Document javaToMongo(Citation citation){
         String titre = null;
         if (citation.getFilm() != null){
@@ -85,6 +113,11 @@ public class Connexion {
         return doc;
     }
 
+    /**
+     * Méthode permettant de convertir un document Mongo en une citation java
+     * @param doc le document de la base de données
+     * @return la citation en Java
+     */
     public Citation mongoToJavaCitation(Document doc) {
 
         Film film = null;
@@ -100,6 +133,10 @@ public class Connexion {
         return citation;
     }
 
+    /**
+     * Méthode permettant d'ajouter un compte dans la base de données
+     * @param compte le compte à intégrer dans la base de données
+     */
     public void ajoutCompteBD(Compte compte) {
         MongoCollection<Document> collection = this.database.getCollection("comptes");
 
@@ -117,6 +154,11 @@ public class Connexion {
         collection.replaceOne(Filters.eq("token", compte.getToken()), javaToMongo(compte));
     }
 
+    /**
+     * Méthode permettant de récupérer un compte depuis la base de données grâce à son token
+     * @param token le token du compte à récupérer
+     * @return le compte provenant de la base de données
+     */
     public Compte getCompteBD(String token) {
 
         MongoCollection<Document> collection = this.database.getCollection("comptes");
@@ -127,6 +169,10 @@ public class Connexion {
         return mongoToJavaCompte(doc);
     }
 
+    /**
+     * Méthode permettant de récupérer tous les comptes de la base de données
+     * @return un tableau comprenant tous les comptes
+     */
     public ArrayList<Compte> getComptesBD(){
         ArrayList<Compte> comptes= new ArrayList<>();
 
@@ -143,6 +189,11 @@ public class Connexion {
         return comptes;
     }
 
+    /**
+     * Méthode permettant de convertir un compte en java en document pour l'intégrer dans la base de données
+     * @param compte le compte à convertir
+     * @return le document à intégrer dans la base de données
+     */
     public Document javaToMongo(Compte compte){
         String titre = null;
         if (compte.getFilmVote() != null){
@@ -154,6 +205,11 @@ public class Connexion {
         return doc;
     }
 
+    /**
+     * Méthode permettant de convertir un document Mongo en un compte java
+     * @param doc le document de la base de données
+     * @return le compte en Java
+     */
     public Compte mongoToJavaCompte(Document doc){
 
         Film film = null;
@@ -169,6 +225,10 @@ public class Connexion {
         return compte;
     }
 
+    /**
+     * Méthode permettant d'ajouter un film dans la base de données
+     * @param film le film à intégrer
+     */
     public void ajoutFilmBD(Film film) {
         MongoCollection<Document> collection = this.database.getCollection("films");
 
@@ -184,6 +244,11 @@ public class Connexion {
         collection.replaceOne(Filters.eq("id", film.getId()), javaToMongo(film));
     }
 
+    /**
+     * Méthode permettant de récupérer un film depuis la base données grâce à son titre
+     * @param titre le titre du film
+     * @return le film
+     */
     public Film getFilmBD(String titre) {
 
         MongoCollection<Document> collection = this.database.getCollection("films");
@@ -194,6 +259,11 @@ public class Connexion {
         return mongoToJavaFilm(doc);
     }
 
+    /**
+     * Méthode permettant de récupérer un film depuis la base données grâce à son identifiant
+     * @param id l'identifiant du film
+     * @return le film
+     */
     public Film getFilmBD(int id) {
 
         MongoCollection<Document> collection = this.database.getCollection("films");
@@ -204,6 +274,10 @@ public class Connexion {
         return mongoToJavaFilm(doc);
     }
 
+    /**
+     * Méthode permettant de récupérer l'ensemble des films présents dans la base de données
+     * @return un tableau comprenant l'ensemble des films
+     */
     public ArrayList<Film> getFilmsBD(){
         ArrayList<Film> films= new ArrayList<>();
 
@@ -220,12 +294,22 @@ public class Connexion {
         return films;
     }
 
+    /**
+     * Méthode permettant de convertir un film en java en document pour l'intégrer dans la base de données
+     * @param film le film à convertir
+     * @return le document à intégrer dans la base de données
+     */
     public Document javaToMongo(Film film){
         Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().getTime()).append("resume", film.getOverview())
                 .append("imageLien", film.getPoster_path()).append("score", film.getScore());
         return doc;
     }
 
+    /**
+     * Méthode permettant de convertir un document Mongo en un film en java
+     * @param doc le document de la base de données
+     * @return le film en Java
+     */
     public Film mongoToJavaFilm(Document doc){
 
         // Initialisation d'un objet

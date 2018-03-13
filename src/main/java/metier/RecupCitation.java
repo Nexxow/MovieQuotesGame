@@ -16,13 +16,17 @@ import java.net.URL;
 
 /**
  * Created by Lalatahiana Christophe on 12/03/18.
+ * Classe permettant de récupérer la citation du jour et de l'ajouter dans la BD
  */
-
 public class RecupCitation {
 
     private Connexion co = new Connexion();
     String urlToRead = "http://quotes.rest/qod.json";
 
+    /**
+     * Méthode qui retourne la citation du jour
+     * @return
+     */
     public Citation getQuote(){
 
         try {
@@ -33,6 +37,12 @@ public class RecupCitation {
         }
     }
 
+    /**
+     * Prends une url en entrée pour retourner une citation
+     * @param urlToRead
+     * @return
+     * @throws IOException
+     */
     public Citation getFromUrl(String urlToRead) throws IOException {
 
         URL url = new URL(urlToRead);

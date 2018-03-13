@@ -13,13 +13,13 @@ public class RecupCitationTest {
   RecupCitation recupCitation;
 
   @Test
-  public void getQuote() throws Exception {
-    assertTrue("Récupération d'une citation",recupCitation.getQuote()!=null);
+  public void TestgetQuote() throws Exception {
+    assertTrue("Récupération d'une citation", recupCitation.getQuote() != null);
   }
 
   @Test
-  public void getFromUrl() throws Exception {
-    assertTrue("Récupération d'une citation depuis une url",recupCitation.getFromUrl(urlToRead)!=null);
+  public void TestgetFromUrl() throws Exception {
+    assertTrue("Récupération d'une citation depuis une url", recupCitation.getFromUrl(urlToRead) != null);
   }
 
 }

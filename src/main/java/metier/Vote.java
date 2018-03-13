@@ -23,7 +23,7 @@ public class Vote {
 
     /**
      * Fonction permettant de rajouter un point au score du film
-     * @param film
+     * @param film le film où on augmente son score
      * @return
      */
     public void addScoreFilm(Film film){
@@ -32,7 +32,7 @@ public class Vote {
 
     /**
      * Fonction permettant de récuperer le premier film du classement
-     * @return
+     * @return le premier film
      */
     public Film getPremierFilm(){
         ArrayList<Film> films = co.getFilmsBD();
@@ -68,7 +68,7 @@ public class Vote {
 
     /**
      * Fonction mettant en lien une citation (du jour) avec le film le plus voté
-     * @param citation
+     * @param citation une citation du jour ou non
      * @return la citation à jour
      */
     public Citation lienFilmCitation(Citation citation){

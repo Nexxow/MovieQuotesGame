@@ -109,6 +109,10 @@ public class Compte implements Comparable<Compte>{
         this.citationFav = citationFav;
     }
 
+    public void setFilmVote(Film filmVote) {
+        this.filmVote = filmVote;
+    }
+
     public Film getFilmVote() {
         return filmVote;
     }

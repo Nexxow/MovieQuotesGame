@@ -2,6 +2,9 @@ package modele.classes;
 
 import java.util.List;
 
+/**
+ * Classe permettant de lister toutes les citations
+ */
 public class Citations {
 
     private List<Citation> quotes;
