@@ -14,12 +14,12 @@ public class RecupFilmsTest {
 
   @Test
   public void getMovies() throws Exception {
-    assertTrue("récupération des films",recupfilms.getMovies()!=null);
+    assertTrue("récupération des films", recupfilms.getMovies() != null);
   }
 
   @Test
   public void getFromUrl() throws Exception {
-    assertTrue("récupération depuis l'url à lire",recupfilms.getFromUrl(urlToRead)!=null);
+    assertTrue("récupération depuis l'url à lire", recupfilms.getFromUrl(urlToRead) != null);
   }
 
 }

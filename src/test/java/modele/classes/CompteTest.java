@@ -17,28 +17,30 @@ public class CompteTest {
   Compte compte;
   Date ajd;
   Film filmVote;
+
   @Before
   public void initialize() {
     compte = new Compte("pseudo", "test", "comédie", "mdp", "urlavatar");
     DateFormat dateFormat = new SimpleDateFormat("yyyy");
     ajd = new Date();
-    filmVote = new Film("title",ajd,"resume","url");
+    filmVote = new Film("title", ajd, "resume", "url");
   }
 
   @Test
   public void TestgenerateToken() throws Exception {
     compte.generateToken();
-    assertTrue("Token généré",compte != null);
+    assertTrue("Token généré", compte != null);
   }
 
   @Test
   public void Testvoter() throws Exception {
-    assertTrue("vote pour le film",compte.voter(filmVote));
+    assertTrue("vote pour le film", compte.voter(filmVote));
   }
 
   @Test
   public void TestreinitialiseVote() throws Exception {
     compte.reinitialiseVote();
-assertTrue("film vote = null",compte.getFilmVote()==null);  }
+    assertTrue("film vote = null", compte.getFilmVote() == null);
+  }
 
 }

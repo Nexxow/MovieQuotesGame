@@ -14,12 +14,12 @@ public class RecupCitationTest {
 
   @Test
   public void getQuote() throws Exception {
-    assertTrue("Récupération d'une citation",recupCitation.getQuote()!=null);
+    assertTrue("Récupération d'une citation", recupCitation.getQuote() != null);
   }
 
   @Test
   public void getFromUrl() throws Exception {
-    assertTrue("Récupération d'une citation depuis une url",recupCitation.getFromUrl(urlToRead)!=null);
+    assertTrue("Récupération d'une citation depuis une url", recupCitation.getFromUrl(urlToRead) != null);
   }
 
 }

@@ -22,7 +22,7 @@ public class CompteMongoTest {
   Document doc;
 
   @Before
-  public void initialize(){
+  public void initialize() {
     co = new Connexion();
     database = co.Connexion();
     compte = new Compte("pseudo", "test", "comédie", "mdp", "urlavatar");
@@ -40,9 +40,9 @@ public class CompteMongoTest {
   @Test
   public void TestmajCompteBD() throws Exception {
     ajoutCompteBD(compte);
-    compte.setScore(compte.getScore()+1);
+    compte.setScore(compte.getScore() + 1);
     majCompteBD(compte);
-    assertEquals("MAJ compte",compte,getCompteBD(compte.getToken()));
+    assertEquals("MAJ compte", compte, getCompteBD(compte.getToken()));
   }
 
   @Test
@@ -53,23 +53,23 @@ public class CompteMongoTest {
 
   @Test
   public void TestgetComptesBD() throws Exception {
-    Compte compte2 = new Compte("toto","test","sf","mdp","lienAvatar");
+    Compte compte2 = new Compte("toto", "test", "sf", "mdp", "lienAvatar");
     ArrayList<Compte> comptes = new ArrayList<>();
     comptes.add(compte);
     comptes.add(compte2);
     ajoutCompteBD(compte);
     ajoutCompteBD(compte2);
-    assertEquals("Récupérations de tous les comptes",comptes,CitationMongo.getCitationsBD());
+    assertEquals("Récupérations de tous les comptes", comptes, CitationMongo.getCitationsBD());
   }
 
   @Test
   public void TestjavaToMongo() throws Exception {
-    assertEquals("Test envoi d'un compte java vers mongo",doc,javaToMongo(compte));
+    assertEquals("Test envoi d'un compte java vers mongo", doc, javaToMongo(compte));
   }
 
   @Test
   public void TestmongoToJava() throws Exception {
-    assertEquals("Test récupération d'un compte depuis Mongo vers java",compte,mongoToJava(doc));
+    assertEquals("Test récupération d'un compte depuis Mongo vers java", compte, mongoToJava(doc));
 
   }
 

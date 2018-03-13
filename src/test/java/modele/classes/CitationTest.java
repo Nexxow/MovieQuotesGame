@@ -12,13 +12,13 @@ import static org.junit.Assert.*;
  * Created by Ulysse Blaineau on 22/02/18.
  */
 public class CitationTest {
-    @Test
-    public void estCitationJour() throws Exception {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Date ajd = new Date();
-        Citation citation = new Citation("Le chemin le plus court est souvent le plus moche", ajd);
-        assertTrue("Citation du jour", citation.estCitationJour());
-    }
+  @Test
+  public void estCitationJour() throws Exception {
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    Date ajd = new Date();
+    Citation citation = new Citation("Le chemin le plus court est souvent le plus moche", ajd);
+    assertTrue("Citation du jour", citation.estCitationJour());
+  }
 
 
 }

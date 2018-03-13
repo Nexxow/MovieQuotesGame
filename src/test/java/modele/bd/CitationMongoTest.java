@@ -28,9 +28,9 @@ public class CitationMongoTest {
   Date ajd;
 
   @Before
-  public void initialize(){
-     co = new Connexion();
-     database = co.Connexion();
+  public void initialize() {
+    co = new Connexion();
+    database = co.Connexion();
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     ajd = new Date();
     citation = new Citation("Le chemin le plus court est souvent le plus moche", ajd);
@@ -49,34 +49,35 @@ public class CitationMongoTest {
     ajoutCitationBD(citation);
     citation.setQuote("nouvelle citation");
     majCitationBD(citation);
-    assertEquals("MAJ citation",citation,getCitationBD(ajd));
+    assertEquals("MAJ citation", citation, getCitationBD(ajd));
   }
 
   @Test
-  public void  TestgetCitationBD() throws Exception {
+  public void TestgetCitationBD() throws Exception {
     Citation citation2 = new Citation("Test", ajd);
     ajoutCitationBD(citation2);
     assertEquals("citation dans BD", citation2, getCitationBD(ajd));
   }
-    @Test
+
+  @Test
   public void TestjavaToMongo() throws Exception {
-    assertEquals("Test récup doc depuis citation",doc,javaToMongo(citation));
+    assertEquals("Test récup doc depuis citation", doc, javaToMongo(citation));
   }
 
   @Test
-  public void getCitationsBD(){
+  public void getCitationsBD() {
     Citation citation2 = new Citation("Test", ajd);
     ArrayList<Citation> citations = new ArrayList<>();
     citations.add(citation);
     citations.add(citation2);
     ajoutCitationBD(citation);
     ajoutCitationBD(citation2);
-   assertEquals("Récupérations de toutes les citations",citations,CitationMongo.getCitationsBD());
+    assertEquals("Récupérations de toutes les citations", citations, CitationMongo.getCitationsBD());
   }
 
   @Test
   public void TestmongoToJava() throws Exception {
-assertEquals("Test récup citation depuis doc",citation,mongoToJava(doc));
+    assertEquals("Test récup citation depuis doc", citation, mongoToJava(doc));
   }
 
 }
