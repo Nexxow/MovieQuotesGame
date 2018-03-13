@@ -111,7 +111,8 @@ public class Film implements Comparable<Film> {
     }
 
     public String getRelease_date() {
-        return release_date;
+
+        return new String(new SimpleDateFormat("yyyy-MM-dd").format(this.annee));
     }
 
     public void setRelease_date(String release_date) {

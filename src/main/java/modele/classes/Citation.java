@@ -1,5 +1,8 @@
 package modele.classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,8 +11,13 @@ import java.util.Date;
  * Created by Ulysse Blaineau on 22/02/18.
  */
 public class Citation {
+    @JsonProperty("citation")
     private String quote;
+    @JsonProperty("date")
+    private String dateStr;
+    @JsonIgnore
     private Date date;
+
     private Film film;
 
     public Film getFilm() {
@@ -37,6 +45,14 @@ public class Citation {
 
     public void setQuote(String quote) {
         this.quote = quote;
+    }
+
+    public String getDateStr() {
+        return new String(new SimpleDateFormat("yyyy-MM-dd").format(this.date));
+    }
+
+    public void setDateStr(String dateStr) {
+        this.dateStr = dateStr;
     }
 
     public Date getDate() {

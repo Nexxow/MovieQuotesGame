@@ -2,6 +2,7 @@ package controle;
 
 import metier.RecupCitation;
 import metier.RecupFilms;
+import modele.bd.CitationMongo;
 import modele.classes.Citation;
 import modele.classes.Film;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,9 @@ public class TestFilmController {
      */
     @RequestMapping("/testFilm")
 
-    public ArrayList<Film> getFilms(){
-        new RecupFilms().ajouterFilmsMongo();
-        return getFilmsBD();
+    public ArrayList<Citation> getFilms(){
+        new RecupCitation().ajouterCitationMongo();
+        return CitationMongo.getCitationsBD();
     }
 
 }
