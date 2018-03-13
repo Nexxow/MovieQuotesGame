@@ -1,7 +1,7 @@
 package metier;
 
 import com.google.gson.Gson;
-import modele.bd.FilmMongo;
+import modele.bd.Connexion;
 import modele.classes.Film;
 import modele.classes.ListeFilms;
 import java.io.BufferedReader;
@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 
 public class RecupFilms {
+
+    private Connexion co = new Connexion();
 
     private String apiKey = "f426d1cd57c76ce8189d04c7d7656164";
     private String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key="+apiKey+"&sort_by=popularity.desc";
@@ -62,7 +64,7 @@ public class RecupFilms {
 
     public void ajouterFilmsMongo() {
         for(Film film : getMovies()) {
-            FilmMongo.ajoutFilmBD(film);
+            co.ajoutFilmBD(film);
         }
     }
 

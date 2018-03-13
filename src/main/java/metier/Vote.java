@@ -1,15 +1,11 @@
 package metier;
 
+import modele.bd.Connexion;
 import modele.classes.Citation;
 import modele.classes.Compte;
 import modele.classes.Film;
 
 import java.util.*;
-
-import static modele.bd.CompteMongo.getComptesBD;
-import static modele.bd.CompteMongo.majCompteBD;
-import static modele.bd.FilmMongo.getFilmsBD;
-import static modele.bd.FilmMongo.majFilmBD;
 
 /**
  * Created by Ulysse Blaineau on 09/03/18
@@ -17,14 +13,14 @@ import static modele.bd.FilmMongo.majFilmBD;
  */
 public class Vote {
 
-    private static Map<Film, Integer> map = new HashMap<Film, Integer>();
+    private Connexion co = new Connexion();
 
     /**
      * Fonction permettant de rajouter un point au score du film
      * @param film
      * @return
      */
-    public static void addScoreFilm(Film film){
+    public void addScoreFilm(Film film){
         film.setScore(film.getScore() + 1);
     }
 
@@ -32,8 +28,8 @@ public class Vote {
      * Fonction permettant de récuperer le premier film du classement
      * @return
      */
-    public static Film getPremierFilm(){
-        ArrayList<Film> films = getFilmsBD();
+    public Film getPremierFilm(){
+        ArrayList<Film> films = co.getFilmsBD();
 
         Collections.sort(films, new Comparator<Film>() {
             @Override
@@ -47,17 +43,17 @@ public class Vote {
     /**
      * Fonction permettant de réinitialiser les votes des comptes et donc le score des films
      */
-    public static void reinitialiserVotes(){
-        ArrayList<Compte> comptes = getComptesBD();
+    public void reinitialiserVotes(){
+        ArrayList<Compte> comptes = co.getComptesBD();
         for (Compte compte : comptes){
             compte.reinitialiseVote();
-            majCompteBD(compte);
+            co.majCompteBD(compte);
         }
 
-        ArrayList<Film> films = getFilmsBD();
+        ArrayList<Film> films = co.getFilmsBD();
         for (Film film : films){
             film.setScore(0);
-            majFilmBD(film);
+            co.majFilmBD(film);
         }
 
     }
@@ -67,7 +63,7 @@ public class Vote {
      * @param citation
      * @return la citation à jour
      */
-    public static Citation lienFilmCitation(Citation citation){
+    public Citation lienFilmCitation(Citation citation){
         if (citation.estCitationJour()){
             citation.setFilm(getPremierFilm());
         }

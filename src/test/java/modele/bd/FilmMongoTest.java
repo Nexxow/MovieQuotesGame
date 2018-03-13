@@ -1,6 +1,5 @@
 package modele.bd;
 
-import com.mongodb.client.MongoDatabase;
 import modele.classes.Film;
 import org.bson.Document;
 import org.junit.Before;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
-import static modele.bd.FilmMongo.*;
 
 /**
  * Created by Nicolas Bourges on 13/03/18.
@@ -20,15 +18,12 @@ import static modele.bd.FilmMongo.*;
 public class FilmMongoTest {
 
   Connexion co;
-  MongoDatabase database;
   Film film;
   Date ajd;
   Document doc;
 
   @Before
   public void initialize(){
-    co = new Connexion();
-    database = co.Connexion();
     DateFormat dateFormat = new SimpleDateFormat("yyyy");
     ajd = new Date();
     film = new Film(42,"titre",ajd,"resume","lienImage",5);
@@ -38,27 +33,27 @@ public class FilmMongoTest {
 
   @Test
   public void TestajoutFilmBD() throws Exception {
-    ajoutFilmBD(film);
-    assertEquals("ajout film dans BD", true,getFilmBD(film.getTitle()));
+    co.ajoutFilmBD(film);
+    assertEquals("ajout film dans BD", true, co.getFilmBD(film.getTitle()));
   }
 
   @Test
   public void TestmajFilmBD() throws Exception {
-    ajoutFilmBD(film);
+    co.ajoutFilmBD(film);
     film.setId(film.getId()+1);
-    majFilmBD(film);
-    assertEquals("MAJ film dans bd",film,getFilmBD(film.getTitle()));
+    co.majFilmBD(film);
+    assertEquals("MAJ film dans bd",film, co.getFilmBD(film.getTitle()));
   }
 
   @Test
   public void TestgetFilmBD() throws Exception {
-    ajoutFilmBD(film);
-    assertEquals("test récupération film dans BD", film,getFilmBD(film.getTitle()));
+    co.ajoutFilmBD(film);
+    assertEquals("test récupération film dans BD", film, co.getFilmBD(film.getTitle()));
   }
 
   @Test
   public void TestgetFilmBD1() throws Exception {
-    assertEquals("test récupération film dans BD", film,  getFilmBD(film.getId()));
+    assertEquals("test récupération film dans BD", film, co.getFilmBD(film.getId()));
   }
 
   @Test
@@ -67,19 +62,19 @@ public class FilmMongoTest {
     Film film2 = new Film(66,"test",ajd,"resumeTest","lienImageTest",0);
     films.add(film);
     films.add(film2);
-    ajoutFilmBD(film);
-    ajoutFilmBD(film2);
-    assertEquals("Récupération liste de film",films,getFilmsBD());
+    co.ajoutFilmBD(film);
+    co.ajoutFilmBD(film2);
+    assertEquals("Récupération liste de film",films, co.getFilmsBD());
   }
 
   @Test
   public void TestjavaToMongo() throws Exception {
-    assertEquals("Test envoi d'un film java vers mongo",doc,javaToMongo(film));
+    assertEquals("Test envoi d'un film java vers mongo",doc, co.javaToMongo(film));
   }
 
   @Test
   public void TestmongoToJava() throws Exception {
-    assertEquals("Test récupération d'un film depuis Mongo vers java",film,mongoToJava(doc));
+    assertEquals("Test récupération d'un film depuis Mongo vers java",film, co.mongoToJavaFilm(doc));
   }
 
 }

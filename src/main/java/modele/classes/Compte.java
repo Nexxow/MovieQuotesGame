@@ -1,10 +1,6 @@
 package modele.classes;
 
-import modele.bd.CompteMongo;
-
 import java.security.SecureRandom;
-
-import static metier.Vote.addScoreFilm;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
@@ -55,11 +51,6 @@ public class Compte implements Comparable<Compte>{
         this.lienAvatar = lienAvatar;
         this.token = token;
         this.citationFav = citationFav;
-    }
-
-    // Appel dans CompteMongo pour ajouter à la bd
-    private void ajoutCompteMongo() {
-        CompteMongo.ajoutCompteBD(this);
     }
 
     public int getScore() {

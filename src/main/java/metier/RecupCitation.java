@@ -3,7 +3,8 @@ package metier;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import modele.bd.CitationMongo;
+
+import modele.bd.Connexion;
 import modele.classes.Citation;
 import modele.classes.Citations;
 import java.io.BufferedReader;
@@ -18,6 +19,8 @@ import java.net.URL;
  */
 
 public class RecupCitation {
+
+    private Connexion co = new Connexion();
     String urlToRead = "http://quotes.rest/qod.json";
 
     public Citation getQuote(){
@@ -66,7 +69,7 @@ public class RecupCitation {
     }
 
     public void ajouterCitationMongo() {
-        CitationMongo.ajoutCitationBD(getQuote());
+        co.ajoutCitationBD(getQuote());
     }
 
 }
