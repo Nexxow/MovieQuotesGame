@@ -1,5 +1,6 @@
 package controle;
 
+import com.google.gson.Gson;
 import metier.Score;
 import modele.bd.Connexion;
 import modele.classes.Compte;
@@ -22,12 +23,14 @@ public class CompteController {
 
     /**
      * Prends un login en entrée, créer un compte puis retourne son token
-     * @param compte
-     *            Le login du compte que l'on veut créer
-     * @return Token du compte
+     * @param json
+     * @return compte
      */
     @RequestMapping(value="/newUser", method = RequestMethod.POST)
-    public Compte newUser(@RequestBody Compte compte){
+    public Compte newUser(@RequestBody String json){
+        System.out.println(json);
+        Compte temp = new Gson().fromJson(json, Compte.class);
+        Compte compte = new Compte(temp.getPseudo(), temp.getMail(), temp.getGenrePrefere(), temp.getMdp(), temp.getLienAvatar());
 
         co.ajoutCompteBD(compte);
 
@@ -56,11 +59,20 @@ public class CompteController {
 
     /**
      * Méthode permettant de mettre à jour un compte
-     * @param compte
-     * @return le compte mis à jour
+     * @param pseudo
+     * @param mail
+     * @param genrePrefere
+     * @param mdp
+     * @param lienAvatar
+     * @return compte
      */
     @RequestMapping(value="/majCompte", method = RequestMethod.POST)
-    public Compte majCompte(@RequestBody Compte compte){
+    public Compte majCompte(@RequestParam("pseudo") String pseudo, @RequestParam("mail") String mail,
+                            @RequestParam("genrePrefere") String genrePrefere,
+                            @RequestParam("mdp") String mdp, @RequestParam("lienAvatar") String lienAvatar){
+
+        Compte compte = new Compte(pseudo, mail, genrePrefere, mdp, lienAvatar);
+
         co.majCompteBD(compte);
 
         return co.getCompteBD(compte.getToken());
