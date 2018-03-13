@@ -13,12 +13,12 @@ public class RecupFilmsTest {
   String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key=f426d1cd57c76ce8189d04c7d7656164&sort_by=popularity.desc";
 
   @Test
-  public void getMovies() throws Exception {
+  public void TestgetMovies() throws Exception {
     assertTrue("récupération des films", recupfilms.getMovies() != null);
   }
 
   @Test
-  public void getFromUrl() throws Exception {
+  public void TestgetFromUrl() throws Exception {
     assertTrue("récupération depuis l'url à lire", recupfilms.getFromUrl(urlToRead) != null);
   }
 
