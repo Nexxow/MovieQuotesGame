@@ -3,11 +3,16 @@ package metier;
 import modele.bd.Connexion;
 import modele.classes.Compte;
 import modele.classes.Film;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+@Lazy(false)
+@Component
 public class Score {
 
     private Connexion co = new Connexion();
@@ -32,7 +37,9 @@ public class Score {
     /**
      * Fonction permettant de compter les scores des joueurs pour les mettre à jour
      */
+    @Scheduled(cron = "06 16 * * * *")
     public void compterScore(){
+        System.out.println("lancement");
         Film prFilm = vote.getPremierFilm();
         ArrayList<Compte> comptes = co.getComptesBD();
         for (Compte compte : comptes){

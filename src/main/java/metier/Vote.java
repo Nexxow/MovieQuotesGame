@@ -4,6 +4,9 @@ import modele.bd.Connexion;
 import modele.classes.Citation;
 import modele.classes.Compte;
 import modele.classes.Film;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -11,6 +14,9 @@ import java.util.*;
  * Created by Ulysse Blaineau on 09/03/18
  * Classe permettant de rajouter au score, et d'avoir le score final de chaque film
  */
+
+@Lazy(false)
+@Component
 public class Vote {
 
     private Connexion co = new Connexion();
@@ -43,7 +49,9 @@ public class Vote {
     /**
      * Fonction permettant de réinitialiser les votes des comptes et donc le score des films
      */
+    @Scheduled(cron = "05 16 * * * *")
     public void reinitialiserVotes(){
+        System.out.println("lancement");
         ArrayList<Compte> comptes = co.getComptesBD();
         for (Compte compte : comptes){
             compte.reinitialiseVote();
