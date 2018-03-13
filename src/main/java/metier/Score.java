@@ -8,15 +8,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * Created by Ulysse Blaineau on 09/03/18
+ * Classe permettant de rajouter au score, et d'avoir le score final de chaque film
+ */
 public class Score {
 
     private Connexion co = new Connexion();
     private Vote vote = new Vote();
 
-    /**
-     * Fonction permettant de prendre le classement entre les utilisateurs
-     * @return
-     */
+  /**
+   * Récupère le classement des comptes
+   * @return le classement des comptes
+   */
     public ArrayList<Compte> getClassement(){
             ArrayList<Compte> comptes = co.getComptesBD();
 
