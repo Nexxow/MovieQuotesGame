@@ -24,37 +24,26 @@ public class CitationController {
     private Vote vote = new Vote();
 
     /**
-     * Prends une citation en entrée, lui met la date du jour et l'insère dans la base de données
-     * @param citationStr
-     *          correspond à la citation que l'on veut insérer
-     * @return la citation
-     */
-    @RequestMapping("/newCitation")
-    public Citation newCitation(@RequestParam(value="citationStr") String citationStr){
-        Citation citation = new Citation(citationStr, new Date());
-
-        co.ajoutCitationBD(citation);
-
-        return citation;
-    }
-
-    /**
-     * Prends une date en entrée pour retourner la citation du jour
-     * @param date
-     *          la date de la citation que l'on veut
-     * @return la citation du jour
-     */
-    @RequestMapping("/getQuote")
-    public Citation getCitation(@RequestParam(value="date") Date date){
-        return co.getCitationBD(date);
-    }
-
-    /**
      * Méthode qui retourne la liste de toutes les citations
      * @return la liste de toutes les citations
      */
     @RequestMapping("/getCitations")
     public ArrayList<Citation> getCitations(){
         return co.getCitationsBD();
+    }
+
+    /**
+     * Méthode qui retourne la citation du jour
+     * @return la citation du jour
+     */
+    @RequestMapping("/getCitationJour")
+    public Citation getCitationJour() {
+        Citation laCitation = null;
+        for (Citation citation : co.getCitationsBD()) {
+            if (citation.estCitationJour()) {
+                laCitation = citation;
+            }
+        }
+        return laCitation;
     }
 }
