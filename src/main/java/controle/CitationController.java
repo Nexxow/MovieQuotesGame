@@ -1,5 +1,7 @@
 package controle;
 
+import metier.Vote;
+import modele.bd.Connexion;
 import modele.classes.Citation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,15 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static metier.Vote.lienFilmCitation;
-import static modele.bd.CitationMongo.*;
-
 /**
  * Created by Ulysse Blaineau on 22/02/18.
  * Classe permettant de faire l'interface api pour les citations
  */
 @RestController
 public class CitationController {
+
+    Connexion co = new Connexion();
+    private Vote vote = new Vote();
 
     /**
      * Prends une citation en entrée, lui met la date du jour et l'insère dans la base de données
@@ -28,7 +30,7 @@ public class CitationController {
     public Citation newCitation(@RequestParam(value="citationStr") String citationStr){
         Citation citation = new Citation(citationStr, new Date());
 
-        ajoutCitationBD(citation);
+        co.ajoutCitationBD(citation);
 
         return citation;
     }
@@ -41,7 +43,7 @@ public class CitationController {
      */
     @RequestMapping("/getQuote")
     public Citation getCitation(@RequestParam(value="date") Date date){
-        return getCitationBD(date);
+        return co.getCitationBD(date);
     }
 
     /**
@@ -50,9 +52,9 @@ public class CitationController {
      */
     @RequestMapping("/getCitations")
     public ArrayList<Citation> getCitations(){
-        for (Citation citation : getCitationsBD()){
-            majCitationBD(lienFilmCitation(citation));
+        for (Citation citation : co.getCitationsBD()){
+            co.majCitationBD(vote.lienFilmCitation(citation));
         }
-        return getCitationsBD();
+        return co.getCitationsBD();
     }
 }

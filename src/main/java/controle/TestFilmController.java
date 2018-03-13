@@ -1,14 +1,12 @@
 package controle;
 
 import metier.RecupCitation;
-import metier.RecupFilms;
-import modele.bd.CitationMongo;
+import modele.bd.Connexion;
 import modele.classes.Citation;
-import modele.classes.Film;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
-import static modele.bd.FilmMongo.getFilmsBD;
 
 /**
  * Classe permettant de faire l'interface api pour les films
@@ -16,6 +14,8 @@ import static modele.bd.FilmMongo.getFilmsBD;
  */
 @RestController
 public class TestFilmController {
+
+    Connexion co = new Connexion();
 
     /**
      * Retourne la liste de tous les films
@@ -25,7 +25,7 @@ public class TestFilmController {
 
     public ArrayList<Citation> getFilms(){
         new RecupCitation().ajouterCitationMongo();
-        return CitationMongo.getCitationsBD();
+        return co.getCitationsBD();
     }
 
 }

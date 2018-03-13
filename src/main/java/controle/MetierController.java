@@ -2,20 +2,15 @@ package controle;
 
 import metier.Score;
 import metier.Vote;
+import modele.bd.Connexion;
 import modele.classes.Compte;
 import modele.classes.Film;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.util.ArrayList;
 
-import static metier.Vote.addScoreFilm;
-import static modele.bd.CompteMongo.getCompteBD;
-import static modele.bd.CompteMongo.majCompteBD;
-import static modele.bd.FilmMongo.getFilmBD;
-import static modele.bd.FilmMongo.majFilmBD;
 
 /**
  * Classe permettant de faire l'interface api pour le coté metier de l'application
@@ -23,6 +18,10 @@ import static modele.bd.FilmMongo.majFilmBD;
  */
 @RestController
 public class MetierController {
+
+    Score score = new Score();
+    Vote vote = new Vote();
+    Connexion co = new Connexion();
 
     /**
      * Prends un token et un id en entrée pour rajouter un vote de film au compte
@@ -33,16 +32,16 @@ public class MetierController {
     @RequestMapping("/voteFilm")
     public Compte voteFilm(@RequestParam(value="token") String token, @RequestParam int id){
 
-        Compte compte = getCompteBD(token);
-        Film film = getFilmBD(id);
+        Compte compte = co.getCompteBD(token);
+        Film film = co.getFilmBD(id);
         boolean err = compte.voter(film);
 
         if (err) {
             // On met à jour le score du film
-            addScoreFilm(film);
-            majFilmBD(film);
+            vote.addScoreFilm(film);
+            co.majFilmBD(film);
             // On met à jour la base de données
-            majCompteBD(compte);
+            co.majCompteBD(compte);
             return compte;
         }
         // return null si l'utilisateur a déjà voté
@@ -51,9 +50,14 @@ public class MetierController {
         }
     }
 
+    /**
+     * permet d'avoir le score d'un film
+     * @param titre
+     * @return le score ou null si le film n'existe pas
+     */
     @RequestMapping("/getScoreFilm")
     public Object getScoreFilm(@RequestParam String titre){
-        Film film = getFilmBD(titre);
+        Film film = co.getFilmBD(titre);
         if (film != null){
             return film.getScore();
         }
@@ -63,9 +67,13 @@ public class MetierController {
 
     }
 
+    /**
+     * permet de prendre le film avec le plus de score
+     * @return le film avec le plus de score
+     */
     @RequestMapping("/getPremierFilm")
     public Object getPremierFilm(){
-        Film film =  Vote.getPremierFilm();
+        Film film =  vote.getPremierFilm();
         if (film == null) {
             return "Erreur, pas de votes encore";
         }
@@ -76,7 +84,7 @@ public class MetierController {
 
     @RequestMapping("/getClassement")
     public ArrayList<Compte> getClassement(){
-        return Score.getClassement();
+        return score.getClassement();
     }
 
 }

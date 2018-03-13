@@ -1,5 +1,6 @@
 package metier;
 
+import modele.bd.Connexion;
 import modele.classes.Compte;
 import modele.classes.Film;
 
@@ -7,13 +8,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static metier.Vote.getPremierFilm;
-import static modele.bd.CompteMongo.getComptesBD;
-
 public class Score {
 
-    public static ArrayList<Compte> getClassement(){
-            ArrayList<Compte> comptes = getComptesBD();
+    private Connexion co = new Connexion();
+    private Vote vote = new Vote();
+
+    /**
+     * Fonction permettant de prendre le classement entre les utilisateurs
+     * @return
+     */
+    public ArrayList<Compte> getClassement(){
+            ArrayList<Compte> comptes = co.getComptesBD();
 
             Collections.sort(comptes, new Comparator<Compte>() {
                 @Override
@@ -24,9 +29,12 @@ public class Score {
             return comptes;
     }
 
+    /**
+     * Fonction permettant de compter les scores des joueurs pour les mettre à jour
+     */
     public void compterScore(){
-        Film prFilm = getPremierFilm();
-        ArrayList<Compte> comptes = getComptesBD();
+        Film prFilm = vote.getPremierFilm();
+        ArrayList<Compte> comptes = co.getComptesBD();
         for (Compte compte : comptes){
             if (compte.getFilmVote() == prFilm){
                 compte.setScore(compte.getScore() + 1);

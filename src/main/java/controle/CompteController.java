@@ -1,6 +1,6 @@
 package controle;
 
-import modele.classes.Citation;
+import modele.bd.Connexion;
 import modele.classes.Compte;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,15 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
-import static metier.Vote.lienFilmCitation;
-import static modele.bd.CompteMongo.*;
-
 /**
  * Classe permettant de faire l'interface api pour pour les comptes
  * Created by Ulysse Blaineau on 23/02/18.
  */
 @RestController
 public class CompteController {
+
+    Connexion co = new Connexion();
 
     /**
      * Prends un login en entrée, créer un compte puis retourne son token
@@ -29,9 +28,9 @@ public class CompteController {
                           @RequestParam String lienAvatar){
         Compte compte = new Compte(login + "", mail + "", genrePrefere + "", mdp + "", lienAvatar + "");
 
-        ajoutCompteBD(compte);
+        co.ajoutCompteBD(compte);
 
-        return getCompteBD(compte.getToken());
+        return co.getCompteBD(compte.getToken());
     }
 
     /**
@@ -42,7 +41,7 @@ public class CompteController {
     // Prends un token en entrée pour retourner un compte
     @RequestMapping("/getUser")
     public Compte getUser(@RequestParam(value="token") String token){
-        return getCompteBD(token);
+        return co.getCompteBD(token);
     }
 
     /**
@@ -51,15 +50,26 @@ public class CompteController {
      */
     @RequestMapping("/getComptes")
     public ArrayList<Compte> getComptes(){
-        return getComptesBD();
+        return co.getComptesBD();
     }
 
+    /**
+     * Méthode permettant de mettre à jour un compte
+     * @param login
+     * @param mdp
+     * @param mail
+     * @param genrePrefere
+     * @param lienAvatar
+     * @param citationFav
+     * @param token
+     * @return le compte mis à jour
+     */
     @RequestMapping("/majCompte")
     public Compte majCompte(@RequestParam(value="login", defaultValue = "Login") String login, @RequestParam String mdp, @RequestParam String mail, @RequestParam String genrePrefere,
                             @RequestParam String lienAvatar, @RequestParam String citationFav, @RequestParam String token){
         Compte compte = new Compte(login, mail, genrePrefere, mdp, lienAvatar, citationFav, token);
-        majCompteBD(compte);
+        co.majCompteBD(compte);
 
-        return getCompteBD(token);
+        return co.getCompteBD(token);
     }
 }
