@@ -4,4 +4,4 @@ Chaque jour l’application propose une quote aléatoire. Les utilisateurs ont e
 
 ##listes des requêtes :
 ###GET
-`/getCitations`:
+`/getCitationJour`:

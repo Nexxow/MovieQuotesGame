@@ -35,15 +35,6 @@ public class CompteController {
     }
 
     /**
-     * Méthode renvoyant la liste de tous les comptes existants
-     * @return liste de comptes en json
-     */
-    @RequestMapping("/getComptes")
-    public ArrayList<Compte> getComptes(){
-        return co.getComptesBD();
-    }
-
-    /**
      * Méthode permettant de mettre à jour un compte
      * @param compte
      * @return le compte mis à jour
@@ -64,11 +55,4 @@ public class CompteController {
         return score.getClassement();
     }
 
-    // Prends un token en entrée pour retourner un compte
-    @RequestMapping("/newUser2")
-    public Compte newUser2(){
-        Compte c = new Compte("login", "mail", "genre", "mdp", "lien");
-        co.ajoutCompteBD(c);
-        return c;
-    }
 }
