@@ -294,12 +294,22 @@ public class Connexion {
         return films;
     }
 
+    /**
+     * Méthode permettant de convertir un film en java en document pour l'intégrer dans la base de données
+     * @param film le film à convertir
+     * @return le document à intégrer dans la base de données
+     */
     public Document javaToMongo(Film film){
         Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().getTime()).append("resume", film.getOverview())
                 .append("imageLien", film.getPoster_path()).append("score", film.getScore());
         return doc;
     }
 
+    /**
+     * Méthode permettant de convertir un document Mongo en un film en java
+     * @param doc le document de la base de données
+     * @return le film en Java
+     */
     public Film mongoToJavaFilm(Document doc){
 
         // Initialisation d'un objet
