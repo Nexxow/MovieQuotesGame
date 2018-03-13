@@ -54,38 +54,6 @@ public class MetierController {
     }
 
     /**
-     * Permet d'avoir le score d'un film
-     * @param titre le titre du film
-     * @return le score ou null si le film n'existe pas
-     */
-    @RequestMapping("/getScoreFilm")
-    public Object getScoreFilm(@RequestParam String titre){
-        Film film = co.getFilmBD(titre);
-        if (film != null){
-            return film.getScore();
-        }
-        else {
-            return null;
-        }
-
-    }
-
-    /**
-     * permet de prendre le film avec le plus de score
-     * @return le film avec le plus de score ou un erreur car le film n' pas encore de vote
-     */
-    @RequestMapping("/getPremierFilm")
-    public Object getPremierFilm(){
-        Film film =  vote.getPremierFilm();
-        if (film == null) {
-            return "Erreur, pas de votes encore";
-        }
-        else {
-            return film;
-        }
-    }
-
-    /**
      * Retourne le classement des comptes
      * @return le classement des comptes
      */

@@ -35,18 +35,7 @@ public class CompteController {
     }
 
     /**
-     * Avoir un utilisateur selon son token
-     * @param token
-     * @return compte en json
-     */
-    // Prends un token en entrée pour retourner un compte
-    @RequestMapping("/getUser")
-    public Compte getUser(@RequestParam(value="token") String token){
-        return co.getCompteBD(token);
-    }
-
-    /**
-     * Méthode renvoyant la liste de toutes les citations existantes
+     * Méthode renvoyant la liste de tous les comptes existants
      * @return liste de comptes en json
      */
     @RequestMapping("/getComptes")
@@ -66,6 +55,10 @@ public class CompteController {
         return co.getCompteBD(compte.getToken());
     }
 
+    /**
+     * Méthode permettant de retrouver le classement des comptes
+     * @return les comptes, classés
+     */
     @RequestMapping("/getClassementComptes")
     public ArrayList<Compte> getClassementComptes(){
         return score.getClassement();
