@@ -51,6 +51,7 @@ public class Vote {
         if (citation.estCitationJour()){
             citation.setFilm(getPremierFilm());
         }
+
         return citation;
     }
 

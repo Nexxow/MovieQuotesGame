@@ -127,10 +127,13 @@ public class Film implements Comparable<Film> {
     @Override
     public int compareTo(Film o) {
         if (this.score > o.score){
-            return 1;
+            return -1;
+        }
+        else if (this.score == o.score){
+            return 0;
         }
         else {
-            return -1;
+            return 1;
         }
     }
 }

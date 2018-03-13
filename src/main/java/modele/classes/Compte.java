@@ -141,7 +141,6 @@ public class Compte implements Comparable<Compte>{
     public boolean voter(Film filmVote){
         if (this.filmVote == null){
             this.filmVote = filmVote;
-            addScoreFilm(filmVote);
             return true;
         }
         else {
