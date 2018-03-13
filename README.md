@@ -17,3 +17,5 @@ Exemple de réponse :
     date: "2018-03-13"
 }
 ```
+
+**GET** `/newUser`

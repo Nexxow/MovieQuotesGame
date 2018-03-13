@@ -35,6 +35,6 @@ public class CitationController {
                 laCitation = citation;
             }
         }
-        return new Citation("la citation", new Date());
+        return laCitation;
     }
 }
