@@ -2,9 +2,7 @@ package controle;
 
 import modele.bd.Connexion;
 import modele.classes.Compte;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -19,14 +17,12 @@ public class CompteController {
 
     /**
      * Prends un login en entrée, créer un compte puis retourne son token
-     * @param login
+     * @param compte
      *            Le login du compte que l'on veut créer
      * @return Token du compte
      */
-    @RequestMapping("/newUser")
-    public Compte newUser(@RequestParam(value="login", defaultValue = "Login") String login, @RequestParam String mdp, @RequestParam String mail, @RequestParam String genrePrefere,
-                          @RequestParam String lienAvatar){
-        Compte compte = new Compte(login + "", mail + "", genrePrefere + "", mdp + "", lienAvatar + "");
+    @RequestMapping(value="/newUser", method = RequestMethod.POST)
+    public Compte newUser(@RequestBody Compte compte){
 
         co.ajoutCompteBD(compte);
 
@@ -55,21 +51,13 @@ public class CompteController {
 
     /**
      * Méthode permettant de mettre à jour un compte
-     * @param login
-     * @param mdp
-     * @param mail
-     * @param genrePrefere
-     * @param lienAvatar
-     * @param citationFav
-     * @param token
+     * @param compte
      * @return le compte mis à jour
      */
-    @RequestMapping("/majCompte")
-    public Compte majCompte(@RequestParam(value="login", defaultValue = "Login") String login, @RequestParam String mdp, @RequestParam String mail, @RequestParam String genrePrefere,
-                            @RequestParam String lienAvatar, @RequestParam String citationFav, @RequestParam String token){
-        Compte compte = new Compte(login, mail, genrePrefere, mdp, lienAvatar, citationFav, token);
+    @RequestMapping(value="/majCompte", method = RequestMethod.POST)
+    public Compte majCompte(@RequestBody Compte compte){
         co.majCompteBD(compte);
 
-        return co.getCompteBD(token);
+        return co.getCompteBD(compte.getToken());
     }
 }

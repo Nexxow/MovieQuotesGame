@@ -58,7 +58,7 @@ public class RecupFilms {
             return films.getFilms();
         } else {
 
-            return null;//"GET request not worked";
+            return null;
         }
     }
 

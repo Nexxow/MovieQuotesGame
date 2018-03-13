@@ -38,7 +38,7 @@ public class CitationController {
     /**
      * Prends une date en entrée pour retourner la citation du jour
      * @param date
-     *          la date de l'on veut la citation
+     *          la date de la citation que l'on veut
      * @return
      */
     @RequestMapping("/getQuote")
