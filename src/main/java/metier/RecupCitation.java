@@ -7,6 +7,9 @@ import com.google.gson.JsonParser;
 import modele.bd.Connexion;
 import modele.classes.Citation;
 import modele.classes.Citations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -78,6 +81,7 @@ public class RecupCitation {
         }
     }
 
+    @Scheduled(cron = "0 0 24 * * ?")
     public void ajouterCitationMongo() {
         co.ajoutCitationBD(getQuote());
     }

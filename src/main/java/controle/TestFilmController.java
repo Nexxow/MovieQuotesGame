@@ -1,8 +1,10 @@
 package controle;
 
 import metier.RecupCitation;
+import metier.RecupFilms;
 import modele.bd.Connexion;
 import modele.classes.Citation;
+import modele.classes.Film;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
@@ -23,11 +25,11 @@ public class TestFilmController {
      * Retourne la liste de tous les films
      * @return les films en json
      */
-    @RequestMapping("/testFilm")
+    @RequestMapping("/testFilms")
 
-    public ArrayList<Citation> getFilms(){
-        new RecupCitation().ajouterCitationMongo();
-        return co.getCitationsBD();
+    public ArrayList<Film> getFilms(){
+        new RecupFilms().ajouterFilmsMongo();
+        return co.getFilmsBD();
     }
 
     @RequestMapping(value ="/testUser", method = RequestMethod.POST)

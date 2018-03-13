@@ -1,5 +1,6 @@
 package controle;
 
+import metier.Score;
 import modele.bd.Connexion;
 import modele.classes.Compte;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 @RestController
 public class CompteController {
 
+    Score score = new Score();
     Connexion co = new Connexion();
 
     /**
@@ -59,5 +61,10 @@ public class CompteController {
         co.majCompteBD(compte);
 
         return co.getCompteBD(compte.getToken());
+    }
+
+    @RequestMapping("/getClassementComptes")
+    public ArrayList<Compte> getClassementComptes(){
+        return score.getClassement();
     }
 }

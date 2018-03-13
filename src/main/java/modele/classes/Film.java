@@ -66,7 +66,7 @@ public class Film implements Comparable<Film> {
     }
 
     public Date getAnnee() {
-        if (!release_date.isEmpty()) {
+        if (release_date != null) {
             try {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 annee = dateFormat.parse(release_date);

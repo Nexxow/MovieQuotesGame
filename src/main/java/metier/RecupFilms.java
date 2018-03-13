@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import modele.bd.Connexion;
 import modele.classes.Film;
 import modele.classes.ListeFilms;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -62,6 +64,7 @@ public class RecupFilms {
         }
     }
 
+    @Scheduled(cron = "0 0 24 * * 0")
     public void ajouterFilmsMongo() {
         for(Film film : getMovies()) {
             co.ajoutFilmBD(film);

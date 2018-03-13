@@ -4,9 +4,11 @@ import modele.bd.Connexion;
 import modele.classes.Citation;
 import modele.classes.Compte;
 import modele.classes.Film;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
@@ -16,7 +18,7 @@ import java.util.*;
  */
 
 @Lazy(false)
-@Component
+@Service
 public class Vote {
 
     private Connexion co = new Connexion();
@@ -49,7 +51,7 @@ public class Vote {
     /**
      * Fonction permettant de réinitialiser les votes des comptes et donc le score des films
      */
-    @Scheduled(cron = "05 16 * * * *")
+    @Scheduled(cron = "0 12 17 * * ?")
     public void reinitialiserVotes(){
         System.out.println("lancement");
         ArrayList<Compte> comptes = co.getComptesBD();

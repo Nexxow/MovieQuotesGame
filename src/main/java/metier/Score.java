@@ -3,9 +3,10 @@ package metier;
 import modele.bd.Connexion;
 import modele.classes.Compte;
 import modele.classes.Film;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,9 +15,10 @@ import java.util.Comparator;
 /**
  * Created by Ulysse Blaineau on 09/03/18
  * Classe permettant de rajouter au score, et d'avoir le score final de chaque film
+ * Classe permettant de rajouter au score, et d'avoir le score final de chaque film
  */
 @Lazy(false)
-@Component
+@Service
 public class Score {
 
     private Connexion co = new Connexion();
@@ -41,7 +43,7 @@ public class Score {
     /**
      * Fonction permettant de compter les scores des joueurs pour les mettre à jour
      */
-    @Scheduled(cron = "06 16 * * * *")
+    @Scheduled(cron = "0 11 17 * * *")
     public void compterScore(){
         System.out.println("lancement");
         Film prFilm = vote.getPremierFilm();
@@ -49,6 +51,7 @@ public class Score {
         for (Compte compte : comptes){
             if (compte.getFilmVote() == prFilm){
                 compte.setScore(compte.getScore() + 1);
+                co.majCompteBD(compte);
             }
         }
     }
