@@ -20,8 +20,8 @@ public class FilmController {
 
     /**
      * Prends un film en entrée et le rajoute dans la base de données
-     * @param titre
-     * @return film en json
+     * @param titre le titre du film
+     * @return  le film en json
      */
     @RequestMapping("/newFilm")
     public Film newFilm(@RequestParam(value="titre") String titre){
@@ -34,8 +34,8 @@ public class FilmController {
 
     /**
      * Prends un titre en entrée et retourne le film
-     * @param titre
-     * @return film en json
+     * @param titre le titre du film
+     * @return le film en json
      */
     @RequestMapping("/getFilmTitre")
     public Film getFilmTitre(@RequestParam(value="titre") String titre){
@@ -44,8 +44,8 @@ public class FilmController {
 
     /**
      * Prends un id en entrée et retourne le film
-     * @param id
-     * @return film en json
+     * @param id l'identifiant du film
+     * @return le film en json
      */
     @RequestMapping("/getFilmId")
     public Film getFilmId(@RequestParam(value="id") int id){
@@ -54,7 +54,7 @@ public class FilmController {
 
     /**
      * Retourne la liste de tous les films
-     * @return les films en json
+     * @return la liste des films en json
      */
     @RequestMapping("/getFilms")
 

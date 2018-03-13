@@ -24,7 +24,7 @@ public class CitationController {
      * Prends une citation en entrée, lui met la date du jour et l'insère dans la base de données
      * @param citationStr
      *          correspond à la citation que l'on veut insérer
-     * @return rien
+     * @return la citation
      */
     @RequestMapping("/newCitation")
     public Citation newCitation(@RequestParam(value="citationStr") String citationStr){
@@ -39,7 +39,7 @@ public class CitationController {
      * Prends une date en entrée pour retourner la citation du jour
      * @param date
      *          la date de la citation que l'on veut
-     * @return
+     * @return la citation du jour
      */
     @RequestMapping("/getQuote")
     public Citation getCitation(@RequestParam(value="date") Date date){
@@ -48,7 +48,7 @@ public class CitationController {
 
     /**
      * Méthode qui retourne la liste de toutes les citations
-     * @return citations json
+     * @return la liste de toutes les citations
      */
     @RequestMapping("/getCitations")
     public ArrayList<Citation> getCitations(){
