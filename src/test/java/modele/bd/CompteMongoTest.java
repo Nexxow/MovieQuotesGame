@@ -21,16 +21,17 @@ public class CompteMongoTest {
 
   @Before
   public void initialize(){
+    Connexion co = new Connexion();
     compte = new Compte("pseudo", "test", "comédie", "mdp", "urlavatar");
 
-    Document doc = new Document("token", compte.getToken()).append("pseudo", compte.getPseudo()).append("mdp", compte.getMdp()).append("mail", compte.getMail()).append("lienAvatar",
-            compte.getLienAvatar()).append("genrePrefere", compte.getGenrePrefere()).append("citationFav", compte.getCitationFav()).append("score", compte.getScore()).append("film", compte.getFilmVote().getTitle());
+    Document doc = new Document();
   }
 
   @Test
   public void TestajoutCompteBD() throws Exception {
     co.ajoutCompteBD(compte);
-    assertEquals("compte dans BD", true, co.getCompteBD(compte.getToken()));
+    Compte compte1 = co.getCompteBD(compte.getToken());
+    assertEquals("compte dans BD", compte, compte1);
   }
 
   @Test
@@ -38,6 +39,7 @@ public class CompteMongoTest {
     co.ajoutCompteBD(compte);
     compte.setScore(compte.getScore()+1);
     co.majCompteBD(compte);
+
     assertEquals("MAJ compte",compte, co.getCompteBD(compte.getToken()));
   }
 
