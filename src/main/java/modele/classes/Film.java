@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -33,7 +34,6 @@ public class Film implements Comparable<Film> {
     @JsonIgnore
     private Date annee;
 
-    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     // a supprimé dans la version finale
     public Film(String title, Date annee, String resume, String imageLien) {
         this.score = 0;
@@ -65,14 +65,16 @@ public class Film implements Comparable<Film> {
     }
 
     public Date getAnnee() {
-        try {
-            annee =  format.parse(release_date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e){
-            return annee;
+        if (!release_date.isEmpty()) {
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                annee = dateFormat.parse(release_date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (NullPointerException npe) {
+                npe.printStackTrace();
+            }
         }
-
         return annee;
     }
 
@@ -89,6 +91,10 @@ public class Film implements Comparable<Film> {
     }
 
     public String getPoster_path() {
+        // si le film à été récupéré depuis la BD
+        if (poster_path.contains("http")) {
+            return poster_path;
+        }
         return urlImage+poster_path;
     }
 

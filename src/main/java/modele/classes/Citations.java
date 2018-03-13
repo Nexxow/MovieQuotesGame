@@ -14,6 +14,9 @@ public class Citations {
         this.quotes = citations;
     }
 
+    public Citation getCitation() {
+        return quotes.get(0);
+    }
 
     public String toString() {
         return String.format("%s", getQuotes());

@@ -1,28 +1,26 @@
 package metier;
 
 import com.google.gson.Gson;
-import modele.classes.Film;
-import modele.classes.ListeFilms;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import modele.bd.CitationMongo;
+import modele.classes.Citation;
+import modele.classes.Citations;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
+
 
 /**
- * Created by Ulysse Blaineau on 21/02/18.
+ * Created by Lalatahiana Christophe on 12/03/18.
  */
 
-public class Films {
+public class RecupCitation {
+    String urlToRead = "http://quotes.rest/qod.json";
 
-    String apiKey;
-    String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key=f426d1cd57c76ce8189d04c7d7656164&sort_by=popularity.desc";
-
-    public ArrayList<Film> getMovies(){
+    public Citation getQuote(){
 
         try {
             return getFromUrl(urlToRead);
@@ -32,9 +30,7 @@ public class Films {
         }
     }
 
-    public ArrayList<Film> getFromUrl(String urlToRead) throws IOException {
-
-        StringBuilder result = new StringBuilder();
+    public Citation getFromUrl(String urlToRead) throws IOException {
 
         URL url = new URL(urlToRead);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -53,15 +49,24 @@ public class Films {
             }
             in.close();
 
-            ListeFilms films = new Gson().fromJson(response.toString(), ListeFilms.class);
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(response.toString());
 
-            return films.getFilms();
+            // récupération de l'objet json { "quotes" : [...] }
+            String resQuote = element.getAsJsonObject().getAsJsonObject("contents").toString();
+
+            // conversion en objet
+            Citations citations = new Gson().fromJson(resQuote, Citations.class);
+
+            return citations.getCitation();
         } else {
 
-            return null;//"GET request not worked";
+            return null;
         }
     }
 
-
+    public void ajouterCitationMongo() {
+        CitationMongo.ajoutCitationBD(getQuote());
+    }
 
 }

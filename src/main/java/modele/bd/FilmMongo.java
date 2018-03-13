@@ -87,7 +87,6 @@ public class FilmMongo {
     public static Document javaToMongo(Film film){
         Document doc = new Document("id", film.getId()).append("titre", film.getTitle()).append("date", film.getAnnee().getTime()).append("resume", film.getOverview())
                 .append("imageLien", film.getPoster_path()).append("score", film.getScore());
-
         return doc;
     }
 

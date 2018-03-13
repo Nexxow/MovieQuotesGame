@@ -58,6 +58,7 @@ public class FilmController {
      * @return les films en json
      */
     @RequestMapping("/getFilms")
+
     public ArrayList<Film> getFilms(){
 
         return getFilmsBD();

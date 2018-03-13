@@ -1,29 +1,26 @@
-package controle;
+package metier;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import modele.classes.Citations;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import modele.bd.FilmMongo;
+import modele.classes.Film;
+import modele.classes.ListeFilms;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
+import java.util.ArrayList;
 
 /**
- * Created by Lalatahiana Christophe on 12/03/18.
+ * Created by Ulysse Blaineau on 21/02/18.
  */
 
-@RestController
-public class TheySaidSoApiController {
-    String urlToRead = "http://quotes.rest/qod.json";
+public class RecupFilms {
 
-    @RequestMapping("/getquote")
-    public Citations getQuote(){
+    private String apiKey = "f426d1cd57c76ce8189d04c7d7656164";
+    private String urlToRead = "https://api.themoviedb.org/3/discover/movie?api_key="+apiKey+"&sort_by=popularity.desc";
+
+    public ArrayList<Film> getMovies(){
 
         try {
             return getFromUrl(urlToRead);
@@ -33,7 +30,7 @@ public class TheySaidSoApiController {
         }
     }
 
-    public Citations getFromUrl(String urlToRead) throws IOException {
+    public ArrayList<Film> getFromUrl(String urlToRead) throws IOException {
 
         StringBuilder result = new StringBuilder();
 
@@ -54,20 +51,21 @@ public class TheySaidSoApiController {
             }
             in.close();
 
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(response.toString());
+            ListeFilms films = new Gson().fromJson(response.toString(), ListeFilms.class);
 
-            // récupération de l'objet json { "quotes" : [...] }
-            String resQuote = element.getAsJsonObject().getAsJsonObject("contents").toString();
-
-            // conversion en objet
-            Citations citations = new Gson().fromJson(resQuote, Citations.class);
-
-            return citations;
+            return films.getFilms();
         } else {
 
-            return null;
+            return null;//"GET request not worked";
         }
     }
+
+    public void ajouterFilmsMongo() {
+        for(Film film : getMovies()) {
+            FilmMongo.ajoutFilmBD(film);
+        }
+    }
+
+
 
 }
