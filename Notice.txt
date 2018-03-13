@@ -1,0 +1,4 @@
+###Notice de déploiement
+
+Executer la commande compile war:war
+Mettre le war dans le dossier webapp du tomcat(edited)
