@@ -5,6 +5,7 @@ import modele.bd.Connexion;
 import modele.classes.Film;
 import modele.classes.ListeFilms;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -70,6 +71,18 @@ public class RecupFilms {
             co.ajoutFilmBD(film);
         }
     }
+
+    /**
+     * Retourne la liste de tous les films
+     * @return les films en json
+     */
+    @RequestMapping("/ajoutFilms")
+
+    public ArrayList<Film> ajoutFilms(){
+        new RecupFilms().ajouterFilmsMongo();
+        return co.getFilmsBD();
+    }
+
 
 
 
