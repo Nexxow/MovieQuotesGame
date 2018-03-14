@@ -1,15 +1,14 @@
 package controle;
 
+import metier.RecupCitation;
 import metier.Vote;
 import modele.bd.Connexion;
 import modele.classes.Citation;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by Ulysse Blaineau on 22/02/18.
@@ -45,5 +44,14 @@ public class CitationController {
     @RequestMapping("/getCitations")
     public ArrayList<Citation> getCitations(){
         return co.getCitationsBD();
+    }
+
+
+    /**
+     * Méthode qui fait une requête pour la citation du jour
+     */
+    @RequestMapping("/newCitation")
+    public void newCitation(){
+        new RecupCitation().ajouterCitationMongo();
     }
 }
