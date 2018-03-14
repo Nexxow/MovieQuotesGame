@@ -37,4 +37,13 @@ public class CitationController {
         }
         return laCitation;
     }
+
+    /**
+     * Méthode qui retourne la liste de toutes les citations
+     * @return la liste de toutes les citations
+     */
+    @RequestMapping("/getCitations")
+    public ArrayList<Citation> getCitations(){
+        return co.getCitationsBD();
+    }
 }
