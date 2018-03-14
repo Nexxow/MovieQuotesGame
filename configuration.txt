@@ -1,0 +1,5 @@
+Pré requis :
+Mongodb version 3.6.3
+Tomcat 7
+Java : jdk 1.8
+le war du projet : MovieQuotesGame-1.0-SNAPSHOT.war
