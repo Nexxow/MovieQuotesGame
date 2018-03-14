@@ -191,6 +191,18 @@ public class Connexion {
     }
 
     /**
+     *
+     */
+    public Compte connexionCompteBD(String login, String mdp){
+        MongoCollection<Document> collection = this.database.getCollection("comptes");
+
+        // Recherche dans la collection le compte avec le bon token
+        Document doc = collection.find(Filters.and(eq("login", login), (eq("mdp", mdp)))).first();
+
+        return mongoToJavaCompte(doc);
+    }
+
+    /**
      * Méthode permettant de convertir un compte en java en document pour l'intégrer dans la base de données
      * @param compte le compte à convertir
      * @return le document à intégrer dans la base de données

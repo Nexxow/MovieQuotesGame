@@ -61,4 +61,15 @@ public class CompteController {
         return score.getClassement();
     }
 
+    /**
+     * Méthode permettant de se connecter au serveur
+     * @param login
+     * @param mdp
+     * @return le compte connecté (avec le token)
+     */
+    @RequestMapping("/connexion")
+    public Compte connexion(@RequestParam String login, @RequestParam String mdp){
+        return co.connexionCompteBD(login, mdp);
+    }
+
 }
