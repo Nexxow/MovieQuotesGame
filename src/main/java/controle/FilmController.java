@@ -1,5 +1,6 @@
 package controle;
 
+import metier.RecupFilms;
 import modele.bd.Connexion;
 import modele.classes.Film;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,5 +31,18 @@ public class FilmController {
 
         return co.getFilmsBD();
     }
+
+
+    /**
+     * Retourne la liste de tous les films
+     * @return les films en json
+     */
+    @RequestMapping("/ajoutFilms")
+
+    public ArrayList<Film> ajoutFilms(){
+        new RecupFilms().ajouterFilmsMongo();
+        return co.getFilmsBD();
+    }
+
 
 }

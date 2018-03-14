@@ -72,18 +72,4 @@ public class RecupFilms {
         }
     }
 
-    /**
-     * Retourne la liste de tous les films
-     * @return les films en json
-     */
-    @RequestMapping("/ajoutFilms")
-
-    public ArrayList<Film> ajoutFilms(){
-        new RecupFilms().ajouterFilmsMongo();
-        return co.getFilmsBD();
-    }
-
-
-
-
 }
