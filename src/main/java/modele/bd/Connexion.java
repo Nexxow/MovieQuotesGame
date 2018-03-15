@@ -207,7 +207,7 @@ public class Connexion {
 
     // Recherche dans la collection le compte avec le bon token
     Document doc = collection.find(Filters.and(eq("pseudo", login), (eq("mdp", mdp)))).first();
-
+    
     return mongoToJavaCompte(doc);
   }
 
@@ -236,16 +236,24 @@ public class Connexion {
    */
   public Compte mongoToJavaCompte(Document doc) {
 
-    Film film = null;
+    Compte compte;
+    try {
 
-    String titre = doc.getString("film");
-    if (titre != null) {
-      film = getFilmBD(titre);
+      Film film = null;
+
+      String titre = doc.getString("film");
+      if (titre != null) {
+        film = getFilmBD(titre);
+      }
+
+      // Initialisation d'un objet
+
+      compte = new Compte(doc.getString("pseudo"), doc.getString("mdp"), doc.getString("mail"), doc.getString("genrePrefere"),
+              doc.getString("citationFav"), doc.getString("lienAvatar"), doc.getString("token"), doc.getInteger("score"), film);
     }
-
-    // Initialisation d'un objet
-    Compte compte = new Compte(doc.getString("pseudo"), doc.getString("mdp"), doc.getString("mail"), doc.getString("genrePrefere"),
-            doc.getString("citationFav"), doc.getString("lienAvatar"), doc.getString("token"), doc.getInteger("score"), film);
+    catch (NullPointerException e){
+      compte = null;
+    }
     return compte;
   }
 
