@@ -43,7 +43,7 @@ public class Score {
     /**
      * Fonction permettant de compter les scores des joueurs pour les mettre à jour
      */
-    @Scheduled(cron = "0 5 0 * * *")
+    @Scheduled(cron = "0 5 12 * * *")
     public void compterScore(){
         System.out.println("lancement");
         Film prFilm = vote.getPremierFilm();

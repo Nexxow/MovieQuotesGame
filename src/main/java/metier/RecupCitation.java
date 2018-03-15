@@ -81,7 +81,7 @@ public class RecupCitation {
         }
     }
 
-    @Scheduled(cron = "0 0 24 * * ?")
+    @Scheduled(cron = "0 0 12 * * ?")
     public void ajouterCitationMongo() {
         co.ajoutCitationBD(getQuote());
     }

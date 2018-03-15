@@ -50,7 +50,7 @@ public class Vote {
     /**
      * Fonction permettant de réinitialiser les votes des comptes et donc le score des films
      */
-    @Scheduled(cron = "0 10 0 * * ?")
+    @Scheduled(cron = "0 10 12 * * ?")
     public void reinitialiserVotes(){
         ArrayList<Compte> comptes = co.getComptesBD();
         for (Compte compte : comptes){
@@ -82,7 +82,7 @@ public class Vote {
     /**
      * Fonction mettant en lien toutes les citations
      */
-    @Scheduled(cron = "0 0 0 * * ?")
+    @Scheduled(cron = "0 0 12 * * ?")
     public void tousLiens(){
         for (Citation citation : co.getCitationsBD()){
             co.majCitationBD(this.lienFilmCitation(citation));

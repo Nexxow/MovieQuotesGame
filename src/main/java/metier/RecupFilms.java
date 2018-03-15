@@ -65,7 +65,7 @@ public class RecupFilms {
         }
     }
 
-    @Scheduled(cron = "0 0 24 * * 0")
+    @Scheduled(cron = "0 0 12 * * 0")
     public void ajouterFilmsMongo() {
         for(Film film : getMovies()) {
             co.ajoutFilmBD(film);
