@@ -206,7 +206,7 @@ public class Connexion {
     MongoCollection<Document> collection = this.database.getCollection("comptes");
 
     // Recherche dans la collection le compte avec le bon token
-    Document doc = collection.find(Filters.and(eq("login", login), (eq("mdp", mdp)))).first();
+    Document doc = collection.find(Filters.and(eq("pseudo", login), (eq("mdp", mdp)))).first();
 
     return mongoToJavaCompte(doc);
   }
