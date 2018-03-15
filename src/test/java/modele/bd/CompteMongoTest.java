@@ -38,7 +38,7 @@ public class CompteMongoTest {
   public void TestmajCompteBD() throws Exception {
     co.ajoutCompteBD(compte);
     compte.setScore(compte.getScore()+1);
-    co.majCompteBD(compte);
+    co.majCompteBD(compte.getToken(), compte);
 
     assertEquals("MAJ compte",compte, co.getCompteBD(compte.getToken()));
   }

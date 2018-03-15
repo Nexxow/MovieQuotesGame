@@ -55,7 +55,7 @@ public class Score {
 
                 System.out.println("on passe dedans");
                 compte.setScore(compte.getScore() + 1);
-                co.majCompteBD(compte);
+                co.majCompteBD(compte.getToken(), compte);
             }
         }
     }

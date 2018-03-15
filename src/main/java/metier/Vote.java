@@ -55,7 +55,7 @@ public class Vote {
         ArrayList<Compte> comptes = co.getComptesBD();
         for (Compte compte : comptes){
             compte.reinitialiseVote();
-            co.majCompteBD(compte);
+            co.majCompteBD(compte.getToken(), compte);
         }
 
         ArrayList<Film> films = co.getFilmsBD();

@@ -43,7 +43,7 @@ public class MetierController {
             vote.addScoreFilm(film);
             co.majFilmBD(film);
             // On met à jour la base de données
-            co.majCompteBD(compte);
+            co.majCompteBD(compte.getToken(), compte);
             return compte;
         }
         // return null si l'utilisateur a déjà voté

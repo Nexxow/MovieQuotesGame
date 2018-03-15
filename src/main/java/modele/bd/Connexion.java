@@ -154,12 +154,12 @@ public class Connexion {
   }
 
   // met à jour un élément dans la bd
-  public void majCompteBD(Compte compte) {
+  public void majCompteBD(String token, Compte compte) {
 
     MongoCollection<Document> collection = this.database.getCollection("comptes");
 
     // On remplace par la nouvelle valeur
-    collection.replaceOne(Filters.eq("token", compte.getToken()), javaToMongo(compte));
+    collection.replaceOne(Filters.eq("token", token), javaToMongo(compte));
   }
 
   /**

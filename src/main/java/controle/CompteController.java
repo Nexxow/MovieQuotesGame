@@ -47,7 +47,8 @@ public class CompteController {
         Compte temp = new Gson().fromJson(json, Compte.class);
         Compte compte = new Compte(temp.getPseudo(), temp.getMail(),
                 temp.getGenrePrefere(), temp.getMdp(), temp.getLienAvatar());
-        co.majCompteBD(compte);
+        compte.setToken(temp.getToken());
+        co.majCompteBD(temp.getToken(), compte);
 
         return co.getCompteBD(compte.getToken());
     }
